@@ -16,7 +16,7 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <h1>Bootstrap examplesss</h1>
+            <h1>Bootstrap examples</h1>
         </div>
         <?php
         // put your code here
