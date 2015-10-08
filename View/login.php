@@ -7,7 +7,6 @@ and open the template in the editor.
 <html>
     <head>
         <title></title>
-        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -16,8 +15,11 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <h1>Bootstrap example</h1>
+            <div class="jumbotron">
+                <p>some text in paragraph tags</p>
+            </div>
         </div>
+        <p>some text in paragraph tags</p>
         <?php
         // put your code here
         ?>
