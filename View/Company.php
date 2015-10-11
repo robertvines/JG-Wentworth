@@ -24,9 +24,13 @@ Initial page to view companies
         <div class="container">
             <h1>Companies</h1>
             
+            <div>
+                <button id="createCom">Create new Company</button>
+            </div>
+            
             <table class="table-striped">
                 <tr>
-                    <th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
+                    <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
                 <?php
                 $sql = "SELECT * FROM COMPANY;";
@@ -41,14 +45,49 @@ Initial page to view companies
 
                     ?>
                 <tr>
+                    <td><button>Edit</button><button>Delete</button></td>
                     <td><?php echo $comID; ?></td> <td><?php echo $name; ?></td> <td><?php echo $dateBus; ?></td>
                     <td><?php echo $busType; ?></td> <td><?php echo $address; ?></td>
+                    
                 </tr>
                 <?php
                 endwhile;
                 ?>
             </table>
             
+            <div id="formA">
+                <form id="editForm">
+                    <fieldset>
+                        <legend>Edit Company</legend>
+                        <button>Hide form</button>
+                        <table>
+                            <tr><td>ID:</td> <td>###</td></tr>
+                            <tr><td>Name:</td> <td><input type="text"></td></tr>
+                            <tr><td>Type of Business:</td> <td><input type="text"></td></tr>
+                            <tr><td>Date of First Business</td> <td><input type="text"></td></tr>
+                            <tr><td>Address</td> <td><input type="text"></td></tr>
+                        </table>
+                        <input type="submit">
+                    </fieldset>
+                </form>
+            </div>
+            
+            <div id="formB">
+                <form id="createForm">
+                    <fieldset>
+                        <legend>Create a Company</legend>
+                        <button>Hide form</button>
+                        <table>
+                            <tr><td>Name:</td> <td><input type="text"></td></tr>
+                            <tr><td>Type of Business:</td> <td><input type="text"></td></tr>
+                            <tr><td>Date of First Business</td> <td><input type="text"></td></tr>
+                            <tr><td>Address</td> <td><input type="text"></td></tr>
+                        </table>
+                        <input type="submit">
+                    </fieldset>
+                </form>
+            </div>
+                
         </div>
     </body>
 </html>
