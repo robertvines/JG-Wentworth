@@ -1,0 +1,183 @@
+/* 
+    Created on : Jul 12, 2015, 3:12:17 PM
+    Author     : Robert Vines
+*/
+
+/* Image for logo */
+#logo { 
+    position: absolute;
+    width: 250px;
+    height: 72px;
+    top: 0px;
+    left: 0px;
+    }
+
+/* Blue rectangle for rest of logo */
+hr {
+    height: 11px;
+    background-color: #0F6746;
+    border: none;
+    position: relative;
+    top: 64px;
+    margin-left: -8;
+    margin-right: -8;
+   }
+    
+/* Navigation bar */
+#nav ul {
+    z-index: 1;
+    font: bold 17px palatino linotype, serif;
+    top: 30px;
+    position: absolute;
+    float: left;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #295190;
+    }  
+
+/* Navigation bar */
+#nav li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    }
+
+/* Navigation bar link */
+#nav a {
+    float: left;
+    height: 38px;
+    line-height: 36px;
+    padding: 0 15px;
+    text-decoration: none;
+    color: #295190;
+    }
+
+/* Change color of link */
+a:link {
+    color:#FFFFFF;        
+    }
+
+/* Navigation bar link to white */
+a:visited {
+    color: #FFFFFF;
+    }
+    
+/* Navigation bar current link */
+#current { 
+    color: #C0C0C0
+    }
+
+/* Position navigation bar link */
+#user {
+    text-indent: 260px;
+    }
+
+/* Every page, grey */
+#page {
+    position: relative;
+    top: 83px;
+    left:0;
+    background: none repeat 0 0 #E8E8E8;
+    height: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    text-align: left;
+    width: 100%;   
+    overflow-y: scroll;
+    }
+  
+/* Login page, white box */
+#loginBox {
+    position: relative;
+    top: 80px;
+    margin: auto;
+    width: 45%;
+    height: 250px;
+    background: #FFFFFF;
+    border: 3px solid #9D9D9D;
+    }
+
+/* Login page, bold text */
+#loginHeader {
+    padding-top: 15px;
+    font: bold 17px palatino linotype, serif; 
+    text-align: center;
+    }
+
+/* Login page, textbox text */
+#loginText {
+    padding-left: 15px;
+    font: 14px palatino linotype, serif; 
+    text-align: center;
+    }
+ 
+/* Postion body of each page */
+#body {
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-bottom: 25px;
+    position: relative;
+    width: 90%;
+    float: left;
+    font: 14px palatino linotype, serif;
+    background: none repeat scroll 0 0 #E8E8E8;
+    }
+
+/*Form table backgrounds to white*/
+#formTable td{
+    background-color: #E8E8E8;    
+    }
+    
+/*Formatting text in body of tables*/
+tbody {
+    font: 15px palatino linotype, serif; 
+    }
+  
+/* Table body formating */
+tbody, td {
+    border-collapse: collapse; 
+    padding-top: 3px;
+    padding-right: 15px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    }
+
+/*format table in create alumni*/
+th {
+    color: white;
+    background-color: #295190;
+    font: bold 15px palatino linotype, serif;
+    border-bottom: 2px solid black;
+    padding-right: 3px;
+    font-weight: bold;
+    text-align: center;
+    border-collapse: collapse;
+    border: 0px;  
+    padding-top: 3px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 7px;  
+    }
+    
+/* Change color of every other row in tables */
+tbody tr:nth-child(even){
+    background-color: #DEE8F5;
+    }
+
+tbody tr:nth-child(odd){
+    background-color: white;
+    }
+
+/*Buttons*/
+#button {
+    border-radius: 5px;
+    font-family: serif;
+    color: #ffffff;
+    font-size: 14px;
+    background: #4d5052;
+    padding: 4px 6px 4px 6px;
+    text-decoration: none;
+    }
