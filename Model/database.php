@@ -4,16 +4,21 @@
    Sample Database connection code and queries.
  */
 
-/* CONNECTION CODE - include this code anytime you are interacting with the database
+/* CONNECTION CODE - include this code anytime you are interacting with the database */
  
     $user = 'sql591897';
     $password = 'hA5!kQ4%';
     $db = 'sql591897';  
     $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-    $pdo = new PDO($conn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- */ 
-
+    
+ 
+    try {
+        $pdo = new PDO($conn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (Exception $ex) {
+        echo 'Connection Failed: ' . $ex->getMessage();
+    }
+    
   /*  SAMPLE SELECT STATEMENT FROM DATABASE
 
     $sql = "SELECT FirstName, LastName, UserID, Role FROM USER;";
