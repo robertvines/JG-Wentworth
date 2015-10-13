@@ -10,6 +10,44 @@ Initial page to view companies
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript">
+    /* *************************************************************************
+     * Initially hide forms on page load    
+     */
+     $(document).ready(function() {     
+         if($( '#form-A' ).is(":visible")){
+              $( '#form-A' ).hide();
+         }
+         if($( '#form-B' ).is(":visible")){
+              $( '#form-B' ).hide();
+         }
+     });
+     /* *************************************************************************
+     * In    
+     */
+    $(document).ready(function() {
+        $('#createCom').click(function(){
+            $('#form-B').show();
+            if($( '#form-A' ).is(":visible")){
+              $( '#form-A' ).hide();
+         }
+        });
+ 
+        $('.editCom').click(function(){
+            $('#form-A').show();
+            if($( '#form-B' ).is(":visible")){
+              $( '#form-B' ).hide();
+         }
+        });
+     
+        function deleteCompany(){
+         
+        }
+     
+    });
+        </script>
+
     </head>
     <body>
         <?php
@@ -45,7 +83,7 @@ Initial page to view companies
 
                     ?>
                 <tr>
-                    <td><button>Edit</button><button>Delete</button></td>
+                    <td><button class="editCom">Edit</button><button>Delete</button></td>
                     <td><?php echo $comID; ?></td> <td><?php echo $name; ?></td> <td><?php echo $dateBus; ?></td>
                     <td><?php echo $busType; ?></td> <td><?php echo $address; ?></td>
                     
@@ -55,7 +93,7 @@ Initial page to view companies
                 ?>
             </table>
             
-            <div id="formA">
+            <div id="form-A">
                 <form id="editForm">
                     <fieldset>
                         <legend>Edit Company</legend>
@@ -72,7 +110,7 @@ Initial page to view companies
                 </form>
             </div>
             
-            <div id="formB">
+            <div id="form-B">
                 <form id="createForm">
                     <fieldset>
                         <legend>Create a Company</legend>
@@ -115,11 +153,6 @@ if (!empty($_POST['contact-submit'])) {
 <div id="form-B">
     ... another html form here ....
 </div>
-
-<!-- Hide forms initially with Javascript (visible for non Javascript users) -->
-<script type="text/javascript">
-    $("#form-A, #form-B").hide();
-</script>
 
 <!-- A dropdown to select a value -->
 <select id="choose-form">
