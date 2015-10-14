@@ -13,7 +13,7 @@
         <title>J. G. Wentworth</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="JGWentworth.css" type="text/css"/>
+        <link rel="stylesheet" href="/JGWentworth/View/CSS/JGWentworth.css" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
@@ -27,7 +27,7 @@
                 <li><a href="EditDepartment.php">Department</a></li>
                 <li><a href="EditEmployer.php">Employer</a></li>
                 <li><a href="EditUniversity.php">University</a></li>
-                <li><a href="EditAlumni.php">Alumni</a></li>
+                
                 <li><a id="user" href="Logout.php">Log out</a></li>
             </ul>    
         </div>

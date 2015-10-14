@@ -1,42 +1,42 @@
+<!DOCTYPE html>
 <?php
-
 /* 
  * @author John Cochran
  * Handles multiple forms that will be submitted from Company.php
  */
+include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
+include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
 
-$user = 'sql591897';
-$password = 'hA5!kQ4%';
-$db = 'sql591897';  
-$conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-    
- 
-try {
-      $pdo = new PDO($conn, $user, $password);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $ex) {
-      echo 'Connection Failed: ' . $ex->getMessage();
-  }
+?>
+    <body>
+        <p>paragraph</p>
+        <div id="page">
+            <?php 
+            if (!empty($_POST['edit-submit'])) {
   
-  if (!empty($_POST['edit-submit'])) {
-  echo 'edit submit is not empty';
-  
-  echo $_POST['editID'];
-  echo $_POST['editName'];
-  echo $_POST['editType'];
-  echo $_POST['editDate'];
-  echo $_POST['editAddress'];
-  
-}
+                try{
+                    echo $_POST['editID'];
+                    echo $_POST['editName'];
+                    echo $_POST['editType'];
+                    echo $_POST['editDate'];
+                    echo $_POST['editAddress'];
+                    
+                    
+                } catch (Exception $ex) {
+                }//end try catch
+            }// end first if
 
-if (!empty($_POST['create-submit'])) {
-    echo 'create submit is not empty';
+            if (!empty($_POST['create-submit'])) {
     
-    echo $_POST['newCompName'];
-    echo $_POST['newBusiness'];
-    echo $_POST['newDateOfBusiness'];
-    echo $_POST['newAddress'];
-
-}
-    
-    
+                try{
+                    echo $_POST['newCompName'];
+                    echo $_POST['newBusiness'];
+                    echo $_POST['newDateOfBusiness'];
+                    echo $_POST['newAddress'];
+                } catch (Exception $ex) {
+                }//end try catch
+            }// end second if
+            ?>
+        </div>
+    </body>
+</html>

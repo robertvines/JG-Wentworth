@@ -2,95 +2,21 @@
 <!--
 Initial page to view companies
 -->
+
 <?php 
-    $user = 'sql591897';
-$password = 'hA5!kQ4%';
-$db = 'sql591897';  
-$conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-
-try {
-      $pdo = new PDO($conn, $user, $password);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $ex) {
-      echo 'Connection Failed: ' . $ex->getMessage();
-  }
+    include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
+    include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
 ?>
-
-<html>
-    <head>
-        <title>Companies</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        
-        <script type="text/javascript">    
-    /* *************************************************************************
-     * Initially hide forms on page load    
-     */
-     $(document).ready(function() {     
-         if($( '#form-A' ).is(":visible")){
-              $( '#form-A' ).hide();
-         }
-         if($( '#form-B' ).is(":visible")){
-              $( '#form-B' ).hide();
-         }
-         $('#hiddenID').hide();
-     });
-     /* *************************************************************************
-     * Shows the form that the user selects, hide the other if it is visible
-     */
-    $(document).ready(function() {
-        $('#createCom').click(function(){
-            $('#form-B').show();
-            if($( '#form-A' ).is(":visible")){
-              $( '#form-A' ).hide();
-         }
-        });
- 
-        $('.editCom').click(function(){ 
-            // SHOW THE EDIT FORM, HIDE CREATE FORM
-            $('#form-A').show();
-            if($( '#form-B' ).is(":visible")){
-              $( '#form-B' ).hide();
-         }
-         //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
-            var id = $(this).get(0).id;
-    
-            document.getElementById('editID').innerHTML = id;
-            document.getElementById('editName').value = document.getElementById('name'+id).innerHTML;
-            document.getElementById('editDate').value = document.getElementById('dateBus'+id).innerHTML;
-            document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
-            document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
-            document.getElementById('hiddenID').value = id;
-        });
-        
-        //Select the text inside the textbox when it has focus
-        $('#editName, #editType, #editDate, #editAddress').click( function(){
-            $(this).select();
-        });
-       // hide the form when the user clicks the hide form button
-       $('#hideCreate').click(function(){
-            $('#form-B').hide(); 
-         });
-       
-        $('#hideEdit').click(function(){
-            $('#form-A').hide();  
-         });  
-    });// end documet.ready function   
-        </script>
-
-    </head>
-    <body>
-        <?php
-                
-        ?>
-        <div>
+<script src="JavaScript/companyViewJS.js"></script>
+<body>
+        <div id="page">
+            <div id="body">
             <h1>Companies</h1>
             <div>
-                <button id="createCom">Create new Company</button>
+                <button id="createCom" class="button">Create new Company</button>
             </div>
             
-            <table>
+            <table id="will_be_assigned">
                 <tr>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
@@ -119,11 +45,12 @@ try {
                 endwhile;
                 ?>
             </table>
-     <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION -->       
+     <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
+          <div id="will_be_assigned">
             <div id="form-A">
                 <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
-                        <legend>Edit Company</legend>
+                        <legend>Edit a Company</legend>
                         
                         <table>
                             <tr><td>ID:</td> <td id="editID"></td></tr>
@@ -153,7 +80,8 @@ try {
                     </fieldset>
                 </form>
             </div>
-                
-        </div>
+          </div>
+         </div>     
+       </div>
     </body>
 </html>

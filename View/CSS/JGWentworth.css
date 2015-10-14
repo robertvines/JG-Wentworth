@@ -180,7 +180,7 @@ th {
     
 /* Change color of every other row in tables */
 tbody tr:nth-child(even){
-    background-color: #DEE8F5;
+    background-color: #CEF2DF;
     }
 
 tbody tr:nth-child(odd){
