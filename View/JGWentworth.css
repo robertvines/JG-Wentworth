@@ -10,6 +10,7 @@
 #column2{
     float: right;
     position: relative;
+    width: 30%;
 }
 
 /* Image for logo */
@@ -180,7 +181,7 @@ th {
     
 /* Change color of every other row in tables */
 tbody tr:nth-child(even){
-    background-color: #DEE8F5;
+    background-color: #6FEABC;
     }
 
 tbody tr:nth-child(odd){
