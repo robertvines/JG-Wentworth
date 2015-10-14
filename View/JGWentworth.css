@@ -3,11 +3,20 @@
     Author     : Robert Vines
 */
 
+#column1{
+    float: left;
+}
+
+#column2{
+    float: right;
+    position: relative;
+}
+
 /* Image for logo */
 #logo { 
     position: absolute;
     width: 250px;
-    height: 72px;
+    height: 60px;
     top: 0px;
     left: 0px;
     }
@@ -18,7 +27,7 @@ hr {
     background-color: #0F6746;
     border: none;
     position: relative;
-    top: 64px;
+    top: 55px;
     margin-left: -8;
     margin-right: -8;
    }
@@ -34,7 +43,7 @@ hr {
     list-style: none;
     margin: 0;
     padding: 0;
-    color: #295190;
+    color: #0F6746;
     }  
 
 /* Navigation bar */
@@ -48,10 +57,10 @@ hr {
 #nav a {
     float: left;
     height: 38px;
-    line-height: 36px;
+    line-height: 13px;
     padding: 0 15px;
     text-decoration: none;
-    color: #295190;
+    color: #0F6746;
     }
 
 /* Change color of link */
@@ -77,12 +86,15 @@ a:visited {
 /* Every page, grey */
 #page {
     position: relative;
-    top: 83px;
+    top: 74px;
     left:0;
     background: none repeat 0 0 #E8E8E8;
     height: 90%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 25px;
     position: fixed;
     text-align: left;
     width: 100%;   
@@ -113,8 +125,8 @@ a:visited {
     font: 14px palatino linotype, serif; 
     text-align: center;
     }
- 
-/* Postion body of each page */
+
+    /* Postion body of each page */
 #body {
     padding-top: 5px;
     padding-left: 20px;
@@ -125,10 +137,14 @@ a:visited {
     font: 14px palatino linotype, serif;
     background: none repeat scroll 0 0 #E8E8E8;
     }
-
-/*Form table backgrounds to white*/
+    
+/*Form table backgrounds to white for form tables*/
 #formTable td{
     background-color: #E8E8E8;    
+    }
+
+table{
+        border-collapse: collapse;
     }
     
 /*Formatting text in body of tables*/
@@ -148,7 +164,7 @@ tbody, td {
 /*format table in create alumni*/
 th {
     color: white;
-    background-color: #295190;
+    background-color: #0F6746;
     font: bold 15px palatino linotype, serif;
     border-bottom: 2px solid black;
     padding-right: 3px;
