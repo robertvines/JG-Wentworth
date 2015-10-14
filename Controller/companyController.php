@@ -18,12 +18,25 @@ try {
       echo 'Connection Failed: ' . $ex->getMessage();
   }
   
-  if (!empty($_POST['editName'])) {
+  if (!empty($_POST['edit-submit'])) {
   echo 'edit submit is not empty';
+  
+  echo $_POST['editID'];
+  echo $_POST['editName'];
+  echo $_POST['editType'];
+  echo $_POST['editDate'];
+  echo $_POST['editAddress'];
+  
 }
 
-if (!empty($_POST[''])) {
-   //do something here;
+if (!empty($_POST['create-submit'])) {
+    echo 'create submit is not empty';
+    
+    echo $_POST['newCompName'];
+    echo $_POST['newBusiness'];
+    echo $_POST['newDateOfBusiness'];
+    echo $_POST['newAddress'];
+
 }
     
     

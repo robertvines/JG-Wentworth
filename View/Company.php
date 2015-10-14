@@ -2,29 +2,28 @@
 <!--
 Initial page to view companies
 -->
-<?php $user = 'sql591897';
-    $password = 'hA5!kQ4%';
-    $db = 'sql591897';  
-    $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-    
- 
-    try {
-        $pdo = new PDO($conn, $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $ex) {
-        echo 'Connection Failed: ' . $ex->getMessage();
-    } ?>
+<?php 
+    $user = 'sql591897';
+$password = 'hA5!kQ4%';
+$db = 'sql591897';  
+$conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+
+try {
+      $pdo = new PDO($conn, $user, $password);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $ex) {
+      echo 'Connection Failed: ' . $ex->getMessage();
+  }
+?>
 
 <html>
     <head>
         <title>Companies</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         
-        <script type="text/javascript">
+        <script type="text/javascript">    
     /* *************************************************************************
      * Initially hide forms on page load    
      */
@@ -35,9 +34,10 @@ Initial page to view companies
          if($( '#form-B' ).is(":visible")){
               $( '#form-B' ).hide();
          }
+         $('#hiddenID').hide();
      });
      /* *************************************************************************
-     * Show the form that the user selects, hide the other if it is visible
+     * Shows the form that the user selects, hide the other if it is visible
      */
     $(document).ready(function() {
         $('#createCom').click(function(){
@@ -55,11 +55,13 @@ Initial page to view companies
          }
          //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
             var id = $(this).get(0).id;
+    
             document.getElementById('editID').innerHTML = id;
             document.getElementById('editName').value = document.getElementById('name'+id).innerHTML;
             document.getElementById('editDate').value = document.getElementById('dateBus'+id).innerHTML;
             document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
             document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
+            document.getElementById('hiddenID').value = id;
         });
         
         //Select the text inside the textbox when it has focus
@@ -74,9 +76,7 @@ Initial page to view companies
         $('#hideEdit').click(function(){
             $('#form-A').hide();  
          });  
-    });
-
-
+    });// end documet.ready function   
         </script>
 
     </head>
@@ -84,15 +84,13 @@ Initial page to view companies
         <?php
                 
         ?>
-        
-        <div class="container">
+        <div>
             <h1>Companies</h1>
-            
             <div>
                 <button id="createCom">Create new Company</button>
             </div>
             
-            <table class="table-striped">
+            <table>
                 <tr>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
@@ -123,24 +121,25 @@ Initial page to view companies
             </table>
      <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION -->       
             <div id="form-A">
-                <form id="editForm" name="edit-submit" method="post" action="/JGWentworth/Controller/companyController.php">
+                <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
                         <legend>Edit Company</legend>
                         
                         <table>
                             <tr><td>ID:</td> <td id="editID"></td></tr>
-                            <tr><td>Name:</td> <td><input type="text" id="editName"></td></tr>
-                            <tr><td>Type of Business:</td> <td><input type="text" id="editType"></td></tr>
-                            <tr><td>Date of First Business</td> <td><input type="text" id="editDate"></td></tr>
-                            <tr><td>Address</td> <td><input type="text" id="editAddress"></td></tr>
+                            <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
+                            <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
+                            <tr><td>Date of First Business</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
+                            <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
                         </table>
-                        <input type="submit" value="Submit"> <button id='hideEdit' type="button">Cancel</button>
+                        <input type="text" id="hiddenID" name="editID">
+                        <input type="submit" name="edit-submit" value="Submit"> <button id='hideEdit' type="button">Cancel</button>
                     </fieldset>
                 </form>
             </div>
       <!-- FORM THAT ALLOWS A USER TO CREATE A NEW COMPANY -->      
             <div id="form-B">
-                <form id="createForm">
+                <form id="createForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
                         <legend>Create a Company</legend>
                         
@@ -150,7 +149,7 @@ Initial page to view companies
                             <tr><td>Date of First Business</td> <td><input type="text" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
-                        <input type="submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>
+                        <input type="submit" name="create-submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>
                     </fieldset>
                 </form>
             </div>
@@ -158,18 +157,3 @@ Initial page to view companies
         </div>
     </body>
 </html>
-
-
-
-
-<?php 
-/*
-if (!empty($_POST['mailing-submit'])) {
-   //do something here;
-}
-
-if (!empty($_POST['contact-submit'])) {
-   //do something here;
-}
- */
-?>
