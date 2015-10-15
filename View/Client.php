@@ -4,24 +4,8 @@
  * To create, edit, and delete companie employees and non-employees
  */
  include ('Header.php');
+ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
-
-<?php 
-    $user = 'sql591897';
-    $password = 'hA5!kQ4%';
-    $db = 'sql591897';  
-    $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-
-    try 
-    {
-          $pdo = new PDO($conn, $user, $password);
-          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $ex) 
-    {
-          echo 'Connection Failed: ' . $ex->getMessage();
-    }
-?>
-
     <script type="text/javascript">
 
         $(document).ready(function () 
@@ -96,7 +80,7 @@
                 <!-- Show Company Client -->
                 <div id="div1">
                     <h1>Company Client</h1>
-                    <p><button id="createCompClient">Create Client</button></p>               
+                    <p><button id="createCompClient">Create Company Client</button></p>               
                     <table id="column1">
                         <thead>
                             <tr>
@@ -112,25 +96,41 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                                $sql = "SELECT * FROM COMPANY_MEMBER";
+                                
+                                $result = $pdo->query($sql);
+                           
+                                while($val=$result->fetch()):
+                                {
+                                $memberId = $val['MemberID'];
+                                $fName = $val['FirstName'];
+                                $lName = $val['LastName'];
+                                $title = $val['Title'];
+                                $phone = $val['Phone'];
+                                $email = $val['Email'];
+                                $fContacted = $val['DateFirstContact'];
+                            ?>
                             <tr>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><?php echo $fName; ?></td>
+                                <td><?php echo $lName; ?></td>
+                                <td><?php echo $title; ?></td>
+                                <td><?php echo $phone; ?></td>
+                                <td><?php echo $email; ?></td>
+                                <td><?php echo $fContacted; ?></td>
                                 <td><input id="editCompClient" type="submit" value="Edit"></td>
-                                <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
+                                <td><a onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                             </tr>
                         </tbody>
+                        <?php }endwhile; ?>
                     </table>
                 </div>
                 
                 <!-- Show Client -->
                 <div id="div2">
                     <h1>Client</h1>
-                    <p><button id="createClient">Create Company Client</button></p>
+                    <p><button id="createClient">Create Client</button></p>
                     <table id="column1">
                         <thead>
                             <tr>
@@ -172,31 +172,54 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td>we</td>
+                                <td><input type="text" name="photo" /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td>we</td>
+                                <td><input type="text" name="fName" required /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td>daf</td>
+                                <td><input type="text" name="lName" required /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td>daf</td>
+                                <td><input type="text" name="title" /></td>
+                            </tr>
+                            <tr>
+                                <td>Company:</td>
+                                <td>
+                                    <select name='company'>
+                                        <?php 
+                                            $sql = "SELECT Name FROM COMPANY ORDER BY Name";
+                                            $result = $pdo->query($sql);
+
+                                            while ($val = $result->fetch()):
+
+                                            $compName = $val['Name'];
+
+                                            {
+                                                echo "<option>" . $compName . "</option>";
+                                            }endwhile;
+                                        ?>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td>daf</td>
+                                <td><input type="text" name="phone" /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>daf</td>
+                                <td><input type="email" name="email" required /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td>daf</td>
+                                <td><input type="text" name="fContacted" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" name='createCompanyClient' value="submit" /></td>
                             </tr>
                         </table>
                     </form>
@@ -211,35 +234,39 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td>we</td>
+                                <td><input type="text" id='photo' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td>we</td>
+                                <td><input type="text" id='fName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='lName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='title' /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='phone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>daf</td>
+                                <td><input type="email" id='email' /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='address' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td>daf</td>
+                                <td><input type="text" if='fContacted' /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" id='createNoCompClient' /></td>
                             </tr>
                         </table>
                     </form>
@@ -254,31 +281,54 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td>we</td>
+                                <td><input type="text" id='photo' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td>we</td>
+                                <td><input type="text" id='fName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='lName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='title' /></td>
+                            </tr>
+                            <tr>
+                                <td>Company:</td>
+                                <td>
+                                    <select id='company'>
+                                        <?php 
+                                            $sql = "SELECT Name FROM COMPANY ORDER BY Name";
+                                            $result = $pdo->query($sql);
+
+                                            while ($val = $result->fetch()):
+
+                                            $compName = $val['Name'];
+
+                                            {
+                                                echo "<option>" . $compName . "</option>";
+                                            }endwhile;
+                                        ?>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='phone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>daf</td>
+                                <td><input type="email" id='email' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='fContacted' /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" id='editCompanyClient' /></td>
                             </tr>
                         </table>
                     </form>
@@ -293,35 +343,39 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td>we</td>
+                                <td><input type="text" id='photo' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td>we</td>
+                                <td><input type="text" id='fName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='lName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='title' /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='phone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>daf</td>
+                                <td><input type="email" id='email' /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='address' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td>daf</td>
+                                <td><input type="text" id='fContacted' /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" id='editNoCompClient' /></td>
                             </tr>
                         </table>
                     </form>
