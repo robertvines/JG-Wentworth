@@ -71,7 +71,7 @@ Initial page to view companies
                         <legend>Create a Company</legend>
                         
                         <table>
-                            <tr><td>Name:</td> <td><input type="text" name="newCompName"></td></tr>
+                            <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
                             <tr><td>Date of First Business</td> <td><input type="text" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>

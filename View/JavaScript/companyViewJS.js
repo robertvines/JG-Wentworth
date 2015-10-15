@@ -33,6 +33,8 @@
             if($( '#form-B' ).is(":visible")){
               $( '#form-B' ).hide();
          }
+     //    document.getElementById('createName').focus();
+         
          //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
             var id = $(this).get(0).id;
     
@@ -42,6 +44,8 @@
             document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
             document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
             document.getElementById('hiddenID').value = id;
+            
+      //      document.getElementById('editName').focus();
         });
         
         //Select the text inside the textbox when it has focus
