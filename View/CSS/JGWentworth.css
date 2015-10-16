@@ -10,7 +10,6 @@
 #column2{
     float: right;
     position: relative;
-    width: 20%;
 }
 
 /* Image for logo */
@@ -150,7 +149,7 @@ table{
     
 /*Formatting text in body of tables*/
 tbody {
-    font: 15px palatino linotype, serif; 
+    font: 14px palatino linotype, serif; 
     }
   
 /* Table body formating */
@@ -166,7 +165,7 @@ tbody, td {
 th {
     color: white;
     background-color: #0F6746;
-    font: bold 15px palatino linotype, serif;
+    font: bold 14px palatino linotype, serif;
     border-bottom: 2px solid black;
     padding-right: 3px;
     font-weight: bold;

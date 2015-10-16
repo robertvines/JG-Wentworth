@@ -87,7 +87,6 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Title</th>
-                            <th>Company</th>
                             <th>Phone</th>
                             <th>Email</th>
                             <th>First Contacted</th>
@@ -101,20 +100,21 @@
 
                             while($val=$result->fetch()):
                             {
-                            $memberId = $val['MemberID'];
-                            $fName = $val['FirstName'];
-                            $lName = $val['LastName'];
-                            $title = $val['Title'];
-                            $phone = $val['Phone'];
-                            $email = $val['Email'];
-                            $fContacted = $val['DateFirstContact'];
+                                $companyId = $val['CompanyID'];
+                                $memberId = $val['MemberID'];
+                                $fName = $val['FirstName'];
+                                $lName = $val['LastName'];
+                                $title = $val['Title'];
+                                $phone = $val['Phone'];
+                                $email = $val['Email'];
+                                $fContacted = $val['DateFirstContact'];
+                                    
                         ?>
                         <tr>
                             <td></td>
                             <td><?php echo $fName; ?></td>
                             <td><?php echo $lName; ?></td>
                             <td><?php echo $title; ?></td>
-                            <td><?php ?></td>
                             <td><?php echo $phone; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $fContacted; ?></td>
@@ -137,7 +137,6 @@
                             <th>Title</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Address</th>
                             <th>First Contacted</th>
                             <th></th>
                             <th></th>
@@ -165,7 +164,6 @@
                             <td><?php echo $title; ?></td>
                             <td><?php echo $phone; ?></td>
                             <td><?php echo $email; ?></td>
-                            <td><?php echo $address; ?></td>
                             <td><?php echo $fContacted; ?></td>
                             <td><input name="editClient" type="submit" value="Edit"></td>
                             <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
@@ -229,7 +227,7 @@
                                 </tr>
                                 <tr>
                                     <td>First Contacted:</td>
-                                    <td><input type="text" name="fContacted" /></td>
+                                    <td><input type="text" name="fContacted" placeholder="(yyyy-mm-dd)" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -277,7 +275,7 @@
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td><input type="text" name="fContacted" /></td>
+                                <td><input type="text" name="fContacted" placeholder="(yyyy-mm-dd)" /></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -343,7 +341,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="submit" id='editCompanyClient' /></td>
+                                <td><input type="submit" value="Save Company Client" id="client" /></td>
                             </tr>
                         </table>
                     </form>
@@ -390,7 +388,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="submit" id='editNoCompClient' /></td>
+                                <td><input type="submit" value="Save Client" id="client" /></td>
                             </tr>
                         </table>
                     </form>
