@@ -8,7 +8,9 @@
 
     include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php');
     
-    if (!empty($_POST['createCompanyClient'])) 
+    switch ($_POST['client'])
+    {
+    case 'Create Company Client':
     {
   
         $photo = $_POST['photo'];
@@ -24,17 +26,42 @@
         $pdo->query($sql);
 
             $result = $pdo->query($sql);
-
+            
             while($val=$result->fetch()):
-
+            {
             $compId = $val['CompanyID'];
-
+            }
             endwhile;
-        
+            
         $sql = "INSERT INTO COMPANY_MEMBER (CompanyID, FirstName, LastName, Title, Phone, Email, DateFirstContact, PhotoURL) "
-                . "VALUES('$compId', '".$fName."', '".$lName."', '".$title."', '".$phone."', '".$email."', '".$fContacted."', '".$photo."');";
+                . "VALUES('".$compId."', '".$fName."', '".$lName."', '".$title."', '".$phone."', '".$email."', '".$fContacted."', '".$photo."');";
         $pdo->query($sql);
     
         header("Location: /JGWentworth/View/Client.php");
-    }// end first if
+    }// end createCompantClient
+    break;
+    
+    case 'Create Client':
+    {
+        include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php');
+        
+        $photo = $_POST['photo'];
+        $fName = $_POST['fName'];
+        $lName = $_POST['lName'];
+        $title = $_POST['title'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
+        $fContacted = $_POST['fContacted'];
+        
+        
+            
+        $sql = "INSERT INTO `NON_MEMBER` (`FirstName`, `LastName`, `Title`, `Email`, `Phone`, `Address`, `DateFirstContact`, `PhotoURL`) "
+                . "VALUES('".$fName."', '".$lName."', '".$title."', '".$email."', '".$phone."', '".$address."', '".$fContacted."', '".$photo."');";
+        $pdo->exec($sql);
+    
+        header("Location: /JGWentworth/View/Client.php");
+    }//end second if createNoCompClient
+    break;
+    }
 ?>

@@ -82,47 +82,45 @@
                     <h1>Company Client</h1>
                     <p><button id="createCompClient">Create Company Client</button></p>               
                     <table id="column1">
-                        <thead>
-                            <tr>
-                                <th>Photo</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Title</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>First Contacted</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $sql = "SELECT * FROM COMPANY_MEMBER";
-                                
-                                $result = $pdo->query($sql);
-                           
-                                while($val=$result->fetch()):
-                                {
-                                $memberId = $val['MemberID'];
-                                $fName = $val['FirstName'];
-                                $lName = $val['LastName'];
-                                $title = $val['Title'];
-                                $phone = $val['Phone'];
-                                $email = $val['Email'];
-                                $fContacted = $val['DateFirstContact'];
-                            ?>
-                            <tr>
-                                <td></td>
-                                <td><?php echo $fName; ?></td>
-                                <td><?php echo $lName; ?></td>
-                                <td><?php echo $title; ?></td>
-                                <td><?php echo $phone; ?></td>
-                                <td><?php echo $email; ?></td>
-                                <td><?php echo $fContacted; ?></td>
-                                <td><input id="editCompClient" type="submit" value="Edit"></td>
-                                <td><a onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <th>Photo</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>First Contacted</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <?php
+                            $sql = "SELECT * FROM COMPANY_MEMBER";
+
+                            $result = $pdo->query($sql);
+
+                            while($val=$result->fetch()):
+                            {
+                            $memberId = $val['MemberID'];
+                            $fName = $val['FirstName'];
+                            $lName = $val['LastName'];
+                            $title = $val['Title'];
+                            $phone = $val['Phone'];
+                            $email = $val['Email'];
+                            $fContacted = $val['DateFirstContact'];
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td><?php echo $fName; ?></td>
+                            <td><?php echo $lName; ?></td>
+                            <td><?php echo $title; ?></td>
+                            <td><?php ?></td>
+                            <td><?php echo $phone; ?></td>
+                            <td><?php echo $email; ?></td>
+                            <td><?php echo $fContacted; ?></td>
+                            <td><input id="editCompClient" type="submit" value="Edit"></td>
+                            <td><a onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" name='deleteCompClient' value="Delete"></a></td>
+                        </tr>                        
                         <?php }endwhile; ?>
                     </table>
                 </div>
@@ -132,34 +130,47 @@
                     <h1>Client</h1>
                     <p><button id="createClient">Create Client</button></p>
                     <table id="column1">
-                        <thead>
-                            <tr>
-                                <th>Photo</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Title</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>First Contacted</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><input id="editClient" type="submit" value="Edit"></td>
-                                <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <th>Photo</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Title</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>First Contacted</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <?php
+                            $sql = "SELECT * FROM NON_MEMBER";
+
+                            $result = $pdo->query($sql);
+
+                            while($val=$result->fetch()):
+                            {
+                            $memberId = $val['MemberID'];
+                            $fName = $val['FirstName'];
+                            $lName = $val['LastName'];
+                            $title = $val['Title'];
+                            $address = $val['Address'];
+                            $phone = $val['Phone'];
+                            $email = $val['Email'];
+                            $fContacted = $val['DateFirstContact'];
+                        ?>
+                        <tr>
+                            <td></td>
+                            <td><?php echo $fName; ?></td>
+                            <td><?php echo $lName; ?></td>
+                            <td><?php echo $title; ?></td>
+                            <td><?php echo $phone; ?></td>
+                            <td><?php echo $email; ?></td>
+                            <td><?php echo $address; ?></td>
+                            <td><?php echo $fContacted; ?></td>
+                            <td><input name="editClient" type="submit" value="Edit"></td>
+                            <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
+                        </tr>
+                        <?php }endwhile; ?>
                     </table>
                 </div>
                 
@@ -167,60 +178,64 @@
                 <div id="create1">
                     <form method="post" action="/JGWentworth/Controller/ClientController.php">
                         <table id="column2">
-                            <tr>
-                                <th colspan="2">Create Company Client</th>
-                            </tr>
-                            <tr>
-                                <td>Photo:</td>
-                                <td><input type="text" name="photo" /></td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td><input type="text" name="fName" required /></td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td><input type="text" name="lName" required /></td>
-                            </tr>
-                            <tr>
-                                <td>Title:</td>
-                                <td><input type="text" name="title" /></td>
-                            </tr>
-                            <tr>
-                                <td>Company:</td>
-                                <td>
-                                    <select name='company'>
-                                        <?php 
-                                            $sql = "SELECT Name FROM COMPANY ORDER BY Name";
-                                            $result = $pdo->query($sql);
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Create Company Client</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Photo:</td>
+                                    <td><input type="text" name="photo" /></td>
+                                </tr>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td><input type="text" name="fName" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td><input type="text" name="lName" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>Title:</td>
+                                    <td><input type="text" name="title" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Company:</td>
+                                    <td>
+                                        <select name='company'>
+                                            <?php 
+                                                $sql = "SELECT Name FROM COMPANY ORDER BY Name";
+                                                $result = $pdo->query($sql);
 
-                                            while ($val = $result->fetch()):
+                                                while ($val = $result->fetch()):
 
-                                            $compName = $val['Name'];
+                                                $compName = $val['Name'];
 
-                                            {
-                                                echo "<option>" . $compName . "</option>";
-                                            }endwhile;
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phone:</td>
-                                <td><input type="text" name="phone" /></td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td><input type="email" name="email" required /></td>
-                            </tr>
-                            <tr>
-                                <td>First Contacted:</td>
-                                <td><input type="text" name="fContacted" /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" name='createCompanyClient' value="submit" /></td>
-                            </tr>
+                                                {
+                                                    echo "<option>" . $compName . "</option>";
+                                                }endwhile;
+                                            ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td><input type="text" name="phone" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><input type="email" name="email" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>First Contacted:</td>
+                                    <td><input type="text" name="fContacted" /></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="submit" name="client" value="Create Company Client" /></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </form>
                 </div>
@@ -234,39 +249,39 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="text" id='photo' /></td>
+                                <td><input type="text" name="photo" /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='fName' /></td>
+                                <td><input type="text" name="fName" /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" id='lName' /></td>
+                                <td><input type="text" name="lName" /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" id='title' /></td>
+                                <td><input type="text" name="title" /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='phone' /></td>
+                                <td><input type="text" name="phone" /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" id='email' /></td>
+                                <td><input type="email" name="email" /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td><input type="text" id='address' /></td>
+                                <td><input type="text" name="address" /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td><input type="text" if='fContacted' /></td>
+                                <td><input type="text" name="fContacted" /></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="submit" id='createNoCompClient' /></td>
+                                <td><input type="submit" name="client" value="Create Client" /></td>
                             </tr>
                         </table>
                     </form>
@@ -298,7 +313,7 @@
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select id='company'>
+                                    <select name='company'>
                                         <?php 
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
