@@ -6,30 +6,83 @@
  */
 include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
 
+
 ?>
     <body>
         <p>paragraph</p>
         <div id="page">
             <?php 
             if (!empty($_POST['edit-submit'])) {
-                    echo 'made it inside the if statement';
-                
+                    
+                    // retrieve posted data
                     $id = $_POST['editID'];
                     $name = $_POST['editName'];
                     $type = $_POST['editType'];
                     $dateBusiness = $_POST['editDate'];
                     $compAdd = $_POST['editAddress'];
+
+                    //send update to database
+                    updateCompany($id, $name, $type, $dateBusiness, $compAdd);
                     
             }// end first if
 
             if (!empty($_POST['create-submit'])) {
-    
+    echo 'made it inside the if statement';
                     $newName = $_POST['newCompName'];
-                    $newBusiness = $_POST['newBusiness'];
+                    $newType = $_POST['newBusiness'];
                     $newDate = $_POST['newDateOfBusiness'];
                     $newAddress = $_POST['newAddress'];
-                      
+                     
+                    createCompany($newName, $newType, $newDate, $newAddress);
             }// end second if
+            
+            
+    function updateCompany($id, $name, $type, $dateBusiness, $compAdd )
+    {
+     try{ echo'inside function'; 
+         $user = 'sql591897';
+         $password = 'hA5!kQ4%';  
+         $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+         
+         $pdo = new PDO($conn, $user, $password);
+         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         
+         $sql = "UPDATE sql591897.COMPANY SET Name='".$name."', DateFirstBusiness='".$dateBusiness."', BusinessType='".$type."', Address='".$compAdd."' WHERE CompanyID=".$id.";";        
+
+            if ($pdo->query($sql) == TRUE) {
+                echo "Record updated successfully";
+            } else {
+                echo "An error occurred while updating the record: " . $pdo->error;
+            }
+                                     
+        } catch (Exception $ex) {
+           echo $ex->getMessage();
+     }//end try catch
+        
+    }// end function updafeCompany()
+    
+    function createCompany($newName, $newType, $newDate, $newAddress)
+    {
+        try{
+            $user = 'sql591897';
+            $password = 'hA5!kQ4%';  
+            $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+         
+            $pdo = new PDO($conn, $user, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         
+            $sql = "INSERT INTO sql591897.COMPANY (CompanyID, Name, DateFirstBusiness, BusinessType, Address)"
+                            . " VALUES (NULL, '".$newName."', '".$newDate."', '".$newType."', '".$newAddress."');";
+       
+                    if ($pdo->query($sql) == TRUE) {
+                        echo "Record inserted successfully";
+                    } else {
+                        echo "An error occurred while inserting the record : " . $pdo->error;
+                    }
+                } catch (Exception $ex) {
+                }//end try catch
+        
+    }// end function createCompany()
             ?>
         </div>
     </body>

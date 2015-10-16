@@ -4,10 +4,13 @@ Initial page to view companies
 -->
 
 <?php 
-    include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
     include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
+    include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
 <script src="JavaScript/companyViewJS.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <body>
         <div id="page">
             <div id="body">
@@ -20,7 +23,7 @@ Initial page to view companies
                 <tr>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
-                <?php
+                <?php 
                 $sql = "SELECT * FROM COMPANY;";
                 $result = $pdo->query($sql); 
                 
@@ -73,7 +76,7 @@ Initial page to view companies
                         <table>
                             <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
-                            <tr><td>Date of First Business</td> <td><input type="text" name='newDateOfBusiness'></td></tr>
+                            <tr><td>Date of First Business</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
                         <input type="submit" name="create-submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>

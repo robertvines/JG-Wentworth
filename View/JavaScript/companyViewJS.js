@@ -15,6 +15,9 @@
               $( '#form-B' ).hide();
          }
          $('#hiddenID').hide();
+          
+    //    $( '#editAddres, #newDate' ).datepicker();
+ 
      });
      /* *************************************************************************
      * Shows the form that the user selects, hide the other if it is visible

@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,15 +19,15 @@ class companyClass {
 //        private $address;
 //        private $typeOfBusiness;
 //
-//    public function __construct($compID, $nm, $dateBus, $addr, $type)                       
-//    {
+    public function __construct()                       
+    {
 //        $this->setFirstName($compID);
 //        $this->setLastNAme($nm);
 //        $this->setDOB($dateBus);
 //        $this->setAddress($addr);
 //        $this->setGender($type);
-//
-//    }// end constructor
+
+    }// end constructor
 //    
 //    // get functions
 //    public function getFirstName(){return $this->companyID;}
@@ -48,29 +48,33 @@ class companyClass {
     function updateCompany($id, $name, $type, $dateBusiness, $compAdd )
     {
      try{
-        include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php'; 
-        $sql = "UPDATE sql591897.COMPANY SET Name='".$name."', DateFirstBusiness='".$dateBusiness."', BusinessType='".$type."', Address='".$compAdd."' WHERE id=".$id.";";
-                    echo '<br/>'.$sql;
-                       echo '<br/>made it past the sql statement';
-                       $pdo->exec($sql);
-                       echo '<br/>made it past the query';
-//                    if ($pdo->query($sql) == TRUE) {
-//                        echo "Record updated successfully";
-//                    } else {
-//                        echo "An error occurred while updating the record: " . $pdo->error;
-//                    }
-                    
-                    
-                } catch (Exception $ex) {
-                }//end try catch
+         echo'inside function';
+        $user = 'sql591897';
+        $password = 'hA5!kQ4%';       
+        $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+ 
+        $pdo = new PDO($conn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $sql = "UPDATE sql591897.COMPANY SET Name='".$name."', DateFirstBusiness='".$dateBusiness."', BusinessType='".$type."', Address='".$compAdd."' WHERE CompanyID=".$id.";";        
+          $pdo->query($sql); 
+          echo 'got here';
+//            if ($pdo->query($sql) == TRUE) {
+//                echo "Record updated successfully";
+//            } else {
+//                echo "An error occurred while updating the record: " . $pdo->error;
+//            }
+                                     
+        } catch (Exception $ex) {
+           echo $ex->getMessage();
+     }//end try catch
         
     }// end function apply()
     
-  
     function createCompany()
     {
         try{
-            include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
+            
             $sql = "INSERT INTO sql591897.COMPANY (CompanyID, Name, DateFirstBusiness, BusinessType, Address)"
                             . " VALUES (NULL, '".$newName."', '".$newDate."', '".$newBusiness."', '".$newAddress."');";
        
@@ -84,5 +88,20 @@ class companyClass {
                 }//end try catch
         
     }// end function createUser()
+    
+    function startConnection(){
+        $user = 'sql591897';
+        $password = 'hA5!kQ4%';       
+        $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+ 
+        try {
+            $pdo = new PDO($conn, $user, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            
+        } catch (Exception $ex) {
+            echo 'Connection Failed: ' . $ex->getMessage();
+        }
+    }// end 
     
 }//end companyClass

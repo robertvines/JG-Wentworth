@@ -10,7 +10,6 @@
     $password = 'hA5!kQ4%';
     $db = 'sql591897';  
     $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
-    
  
     try {
         $pdo = new PDO($conn, $user, $password);
