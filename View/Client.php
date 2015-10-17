@@ -165,7 +165,7 @@
                             <td><?php echo $phone; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $fContacted; ?></td>
-                            <td><input name="editClient" type="submit" value="Edit"></td>
+                            <td><input id="editClient" type="submit" value="Edit"></td>
                             <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
                         </tr>
                         <?php }endwhile; ?>
@@ -298,7 +298,7 @@
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='fName' /></td>
+                                <td><input type="text" id='fName' value="" /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
