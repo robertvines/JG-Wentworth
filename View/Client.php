@@ -115,14 +115,14 @@
                         ?>
                         <tr>
                             <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
-                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 30px;
-                                    height: 45px;" /></td>
-                            <td><?php echo $fName; ?><input type="hidden" name="showFName" /></td>
-                            <td id="showLName"><?php echo $lName; ?></td>
-                            <td id="showTitle"><?php echo $title; ?></td>
-                            <td id="showPhone"><?php echo $phone; ?></td>
-                            <td id="showEmail"><?php echo $email; ?></td>
-                            <td id="showFContacted"><?php echo $fContacted; ?></td>
+                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
+                                    height: 39px;" /></td>
+                            <td><?php echo $fName; ?></td>
+                            <td><?php echo $lName; ?></td>
+                            <td><?php echo $title; ?></td>
+                            <td><?php echo $phone; ?></td>
+                            <td><?php echo $email; ?></td>
+                            <td><?php echo $fContacted; ?></td>
                             <td><button class="editCompClient" id="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
                             <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>                        
@@ -168,14 +168,14 @@
                         ?>
                         <tr>
                             <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
-                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 30px;
-                                    height: 45px;" /></td>
-                            <td name="showFName"><?php echo $fName; ?></td>
-                            <td id="showCLName"><?php echo $lName; ?></td>
-                            <td id="showCTitle"><?php echo $title; ?></td>
-                            <td id="showCPhone"><?php echo $phone; ?></td>
-                            <td id="showCEmail"><?php echo $email; ?></td>
-                            <td id="showCFContacted"><?php echo $fContacted; ?></td>
+                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
+                                    height: 39px;" /></td>
+                            <td><?php echo $fName; ?></td>
+                            <td><?php echo $lName; ?></td>
+                            <td><?php echo $title; ?></td>
+                            <td><?php echo $phone; ?></td>
+                            <td><?php echo $email; ?></td>
+                            <td><?php echo $fContacted; ?></td>
                             <td><button class="editClient" id="editClient">Edit</button></td>
                             <td><a href="ClientContoller.php?delete_client=<?php echo $memberId ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>
@@ -237,8 +237,8 @@
                                     <td><input type="email" name="compEmail" required /></td>
                                 </tr>
                                 <tr>
-                                    <td>First Contacted:</td>
-                                    <td><input type="text" name="compFContacted" placeholder="(yyyy-mm-dd)" /></td>
+                                    <td>First Contacted <br>yyyy-mm-dd:</td>
+                                    <td><input type="text" name="compFContacted" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -285,8 +285,8 @@
                                 <td><input type="text" name="clientAddress" /></td>
                             </tr>
                             <tr>
-                                <td>First Contacted:</td>
-                                <td><input type="text" name="clientFContacted" placeholder="yyyy-mm-dd" /></td>
+                                <td>First Contacted <br>yyyy-mm-dd:</td>
+                                <td><input type="text" name="clientFContacted" /></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -347,7 +347,7 @@
                                 <td><input type="email" id='editCompEmail' /></td>
                             </tr>
                             <tr>
-                                <td>First Contacted:</td>
+                                <td>First Contacted<br>yyyy-mm-dd:</td>
                                 <td><input type="text" id='editCompFContacted' /></td>
                             </tr>
                             <tr>
@@ -394,7 +394,7 @@
                                 <td><input type="text" id='editClientAddress' /></td>
                             </tr>
                             <tr>
-                                <td>First Contacted:</td>
+                                <td>First Contacted<br>yyyy-mm-dd:</td>
                                 <td><input type="text" id='editClientFContacted' /></td>
                             </tr>
                             <tr>
