@@ -51,7 +51,7 @@
                 $('#edit2').hide();
             });
             
-            $('#editCompClient').click(function ()
+            $('.editCompClient').click(function ()
             {
                 $('#create1').hide();
                 $('#create2').hide();
@@ -59,7 +59,7 @@
                 $('#edit2').hide();
             });
             
-            $('#editClient').click(function ()
+            $('.editClient').click(function ()
             {
                 $('#create1').hide();
                 $('#create2').hide();
@@ -92,6 +92,7 @@
                             <th>First Contacted</th>
                             <th></th>
                             <th></th>
+                        <tbody>
                         </tr>
                         <?php
                             $sql = "SELECT * FROM COMPANY_MEMBER";
@@ -99,7 +100,7 @@
                             $result = $pdo->query($sql);
 
                             while($val=$result->fetch()):
-                            {
+                            
                                 $companyId = $val['CompanyID'];
                                 $memberId = $val['MemberID'];
                                 $fName = $val['FirstName'];
@@ -108,20 +109,25 @@
                                 $phone = $val['Phone'];
                                 $email = $val['Email'];
                                 $fContacted = $val['DateFirstContact'];
-                                    
+                                $photo = $val['PhotoURL'];  
+                                
+                                $trimm = str_replace("C:/MAMP/htdocs","", $photo);
                         ?>
                         <tr>
-                            <td></td>
-                            <td><?php echo $fName; ?></td>
-                            <td><?php echo $lName; ?></td>
-                            <td><?php echo $title; ?></td>
-                            <td><?php echo $phone; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $fContacted; ?></td>
-                            <td><input id="editCompClient" type="submit" value="Edit"></td>
-                            <td><a onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" name='deleteCompClient' value="Delete"></a></td>
+                            <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
+                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 30px;
+                                    height: 45px;" /></td>
+                            <td><?php echo $fName; ?><input type="hidden" name="showFName" /></td>
+                            <td id="showLName"><?php echo $lName; ?></td>
+                            <td id="showTitle"><?php echo $title; ?></td>
+                            <td id="showPhone"><?php echo $phone; ?></td>
+                            <td id="showEmail"><?php echo $email; ?></td>
+                            <td id="showFContacted"><?php echo $fContacted; ?></td>
+                            <td><button class="editCompClient" id="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
+                            <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>                        
-                        <?php }endwhile; ?>
+                        <?php endwhile; ?>
+                        </tbody>
                     </table>
                 </div>
                 
@@ -147,7 +153,7 @@
                             $result = $pdo->query($sql);
 
                             while($val=$result->fetch()):
-                            {
+                         
                             $memberId = $val['MemberID'];
                             $fName = $val['FirstName'];
                             $lName = $val['LastName'];
@@ -156,25 +162,30 @@
                             $phone = $val['Phone'];
                             $email = $val['Email'];
                             $fContacted = $val['DateFirstContact'];
+                            $photo = $val['PhotoURL'];  
+                                
+                                $trimm = str_replace("C:/MAMP/htdocs","", $photo);
                         ?>
                         <tr>
-                            <td></td>
-                            <td><?php echo $fName; ?></td>
-                            <td><?php echo $lName; ?></td>
-                            <td><?php echo $title; ?></td>
-                            <td><?php echo $phone; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $fContacted; ?></td>
-                            <td><input id="editClient" type="submit" value="Edit"></td>
-                            <td><a href="EditEmployer.php?delete_id=<?php echo $empID ?>" onclick="return confirm('Are you sure you want to delete this employer?');"><input type="submit" value="Delete"></a></td>
+                            <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
+                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 30px;
+                                    height: 45px;" /></td>
+                            <td name="showFName"><?php echo $fName; ?></td>
+                            <td id="showCLName"><?php echo $lName; ?></td>
+                            <td id="showCTitle"><?php echo $title; ?></td>
+                            <td id="showCPhone"><?php echo $phone; ?></td>
+                            <td id="showCEmail"><?php echo $email; ?></td>
+                            <td id="showCFContacted"><?php echo $fContacted; ?></td>
+                            <td><button class="editClient" id="editClient">Edit</button></td>
+                            <td><a href="ClientContoller.php?delete_client=<?php echo $memberId ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>
-                        <?php }endwhile; ?>
+                        <?php endwhile; ?>
                     </table>
                 </div>
                 
                 <!-- Create Company Client -->
                 <div id="create1">
-                    <form method="post" action="/JGWentworth/Controller/ClientController.php">
+                    <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table id="column2">
                             <thead>
                                 <tr>
@@ -184,24 +195,24 @@
                             <tbody>
                                 <tr>
                                     <td>Photo:</td>
-                                    <td><input type="text" name="photo" /></td>
+                                    <td><input type="file" name="compPhoto" /></td>
                                 </tr>
                                 <tr>
                                     <td>First Name:</td>
-                                    <td><input type="text" name="fName" required /></td>
+                                    <td><input type="text" name="compFName" required /></td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
-                                    <td><input type="text" name="lName" required /></td>
+                                    <td><input type="text" name="compFName" required /></td>
                                 </tr>
                                 <tr>
                                     <td>Title:</td>
-                                    <td><input type="text" name="title" /></td>
+                                    <td><input type="text" name="compTitle" /></td>
                                 </tr>
                                 <tr>
                                     <td>Company:</td>
                                     <td>
-                                        <select name='company'>
+                                        <select name='compCompany'>
                                             <?php 
                                                 $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                                 $result = $pdo->query($sql);
@@ -219,19 +230,19 @@
                                 </tr>
                                 <tr>
                                     <td>Phone:</td>
-                                    <td><input type="text" name="phone" /></td>
+                                    <td><input type="text" name="compPhone" /></td>
                                 </tr>
                                 <tr>
                                     <td>Email:</td>
-                                    <td><input type="email" name="email" required /></td>
+                                    <td><input type="email" name="compEmail" required /></td>
                                 </tr>
                                 <tr>
                                     <td>First Contacted:</td>
-                                    <td><input type="text" name="fContacted" placeholder="(yyyy-mm-dd)" /></td>
+                                    <td><input type="text" name="compFContacted" placeholder="(yyyy-mm-dd)" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td><input type="submit" name="client" value="Create Company Client" /></td>
+                                    <td><input type="submit" name="createCompClient" value="Create Company Client" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -240,53 +251,53 @@
                 
                 <!-- Create Client -->
                 <div id="create2">  
-                    <form method="post" action="/JGWentworth/Controller/ClientController.php">
+                    <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table id="column2">
                             <tr>
                                 <th colspan="2">Create Client</th>
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="text" name="photo" /></td>
+                                <td><input type="file" name="clientPhoto" /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" name="fName" /></td>
+                                <td><input type="text" name="clientFName" /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" name="lName" /></td>
+                                <td><input type="text" name="clientLName" /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" name="title" /></td>
+                                <td><input type="text" name="clientTitle" /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" name="phone" /></td>
+                                <td><input type="text" name="clientPhone" /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" name="email" /></td>
+                                <td><input type="email" name="clientEmail" /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td><input type="text" name="address" /></td>
+                                <td><input type="text" name="clientAddress" /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td><input type="text" name="fContacted" placeholder="(yyyy-mm-dd)" /></td>
+                                <td><input type="text" name="clientFContacted" placeholder="yyyy-mm-dd" /></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="submit" name="client" value="Create Client" /></td>
+                                <td><input type="submit" name="createClient" value="Create Client" /></td>
                             </tr>
                         </table>
                     </form>
                 </div>
                 
                 <!-- Edit Company Client -->
-                <div id="edit1">
+                <div id="edit1">      
                     <form method="post" action="/JGWentworth/Controller/ClientController.php">
                         <table id="column2">
                             <tr>
@@ -298,20 +309,20 @@
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='fName' value="" /></td>
+                                <td><input type="text" name='editCompFName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" id='lName' /></td>
+                                <td><input type="text" id='editCompLName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" id='title' /></td>
+                                <td><input type="text" id='editCompTitle' /></td>
                             </tr>
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select name='company'>
+                                    <select name='company' id="editCompany">
                                         <?php 
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
@@ -329,18 +340,18 @@
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='phone' /></td>
+                                <td><input type="text" id='editCompPhone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" id='email' /></td>
+                                <td><input type="email" id='editCompEmail' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td><input type="text" id='fContacted' /></td>
+                                <td><input type="text" id='editCompFContacted' /></td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td><input type="hidden" id="hiddenID" name="editID"></td>
                                 <td><input type="submit" value="Save Company Client" id="client" /></td>
                             </tr>
                         </table>
@@ -360,31 +371,31 @@
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='fName' /></td>
+                                <td><input type="text" id='editClientFName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" id='lName' /></td>
+                                <td><input type="text" id='editClientLName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" id='title' /></td>
+                                <td><input type="text" id='editClientTitle' /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='phone' /></td>
+                                <td><input type="text" id='editClientPhone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" id='email' /></td>
+                                <td><input type="email" id='editClientEmail' /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td><input type="text" id='address' /></td>
+                                <td><input type="text" id='editClientAddress' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted:</td>
-                                <td><input type="text" id='fContacted' /></td>
+                                <td><input type="text" id='editClientFContacted' /></td>
                             </tr>
                             <tr>
                                 <td></td>

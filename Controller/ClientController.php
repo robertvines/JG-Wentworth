@@ -5,22 +5,30 @@
  * 
  * @author: Robert Vines
  */
-
+  
     include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php');
     
-    switch ($_POST['client'])
+        //create company client
+    if (isset($_POST['createCompClient']))
     {
-    case 'Create Company Client':
-    {
-  
-        $photo = $_POST['photo'];
-        $fName = $_POST['fName'];
-        $lName = $_POST['lName'];
-        $title = $_POST['title'];
-        $compName = $_POST['company'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $fContacted = $_POST['fContacted'];
+        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_file = $target_dir . basename($_FILES['compPhoto']['name']);
+      
+            if (move_uploaded_file($_FILES['compPhoto']['tmp_name'], $target_file)) //if file is moved to folder
+            {
+                echo 'The file'. basename($_FILES['compPhoto']['name'])." has been uploaded.";
+            }else 
+            {
+               echo 'Sorry, there was an error uploading your file. '.$target_file; 
+            }
+        
+        $fName = $_POST['compFName'];
+        $lName = $_POST['compFName'];
+        $title = $_POST['compTitle'];
+        $compName = $_POST['compCompany'];
+        $phone = $_POST['compPhone'];
+        $email = $_POST['compEmail'];
+        $fContacted = $_POST['compFContacted'];
    
         $sql = "SELECT CompanyID FROM COMPANY WHERE Name = '".$compName."';";
         $pdo->query($sql);
@@ -34,34 +42,59 @@
             endwhile;
             
         $sql = "INSERT INTO COMPANY_MEMBER (CompanyID, FirstName, LastName, Title, Phone, Email, DateFirstContact, PhotoURL) "
-                . "VALUES('".$compId."', '".$fName."', '".$lName."', '".$title."', '".$phone."', '".$email."', '".$fContacted."', '".$photo."');";
+                . "VALUES('".$compId."', '".$fName."', '".$lName."', '".$title."', '".$phone."', '".$email."', '".$fContacted."', '".$target_file."');";
         $pdo->query($sql);
-    
         header("Location: /JGWentworth/View/Client.php");
-    }// end createCompantClient
-    break;
+    }
     
-    case 'Create Client':
+    if (isset($_POST['createClient']))
     {
-        include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php');
+        //create client
+        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_file = $target_dir . basename($_FILES['clientPhoto']['name']);
+      
+            if (move_uploaded_file($_FILES['clientPhoto']['tmp_name'], $target_file)) //if file is moved to folder
+            {
+                echo 'The file'. basename($_FILES['clientPhoto']['name'])." has been uploaded.";
+            }else 
+            {
+               echo 'Sorry, there was an error uploading your file. '.$target_file; 
+            }
         
-        $photo = $_POST['photo'];
-        $fName = $_POST['fName'];
-        $lName = $_POST['lName'];
-        $title = $_POST['title'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $fContacted = $_POST['fContacted'];
-        
-        
+        $fName2 = $_POST['clientFName'];
+        $lName2 = $_POST['clientLName'];
+        $title2 = $_POST['clientTitle'];
+        $email2 = $_POST['clientEmail'];
+        $phone2 = $_POST['clientPhone'];
+        $address = $_POST['clientAddress'];
+        $fContacted2 = $_POST['clientFContacted'];
             
         $sql = "INSERT INTO `NON_MEMBER` (`FirstName`, `LastName`, `Title`, `Email`, `Phone`, `Address`, `DateFirstContact`, `PhotoURL`) "
-                . "VALUES('".$fName."', '".$lName."', '".$title."', '".$email."', '".$phone."', '".$address."', '".$fContacted."', '".$photo."');";
+                . "VALUES('".$fName2."', '".$lName2."', '".$title2."', '".$email2."', '".$phone2."', '".$address2."', '".$fContacted2."', '".$target_file."');";
         $pdo->exec($sql);
     
         header("Location: /JGWentworth/View/Client.php");
-    }//end second if createNoCompClient
-    break;
     }
+    
+    if(isset($_GET['delete_compClient']))
+    { 
+        $memberId = $_GET['delete_compClient'];
+
+        echo $memberId;
+
+        $sql = "DELETE FROM COMPANY_MEMBER WHERE MemberID=".$memberId;
+        $pdo->exec($sql);
+    }
+        
+    if(isset($_GET['delete_client']))
+    { 
+        $memberId = $_GET['delete_compClient'];
+
+        echo $memberId;
+
+        $sql = "DELETE FROM NON_MEMBER WHERE MemberID=".$memberId;
+        $pdo->exec($sql);
+    }
+
+        //header("Location: /JGWentworth/View/Client.php");
 ?>
