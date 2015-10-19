@@ -177,7 +177,7 @@
                             <td><?php echo $email; ?></td>
                             <td><?php echo $fContacted; ?></td>
                             <td><button class="editClient" id="editClient">Edit</button></td>
-                            <td><a href="ClientContoller.php?delete_client=<?php echo $memberId ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
+                            <td><a href="/JGWentworth/Controller/ClientController.php?delete_client=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>
                         <?php endwhile; ?>
                     </table>

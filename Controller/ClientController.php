@@ -80,21 +80,21 @@
     { 
         $memberId = $_GET['delete_compClient'];
 
-        echo $memberId;
-
         $sql = "DELETE FROM COMPANY_MEMBER WHERE MemberID=".$memberId;
         $pdo->exec($sql);
+        
+        header("Location: /JGWentworth/View/Client.php");
     }
         
     if(isset($_GET['delete_client']))
     { 
-        $memberId = $_GET['delete_compClient'];
-
-        echo $memberId;
+        $memberId = $_GET['delete_client'];
 
         $sql = "DELETE FROM NON_MEMBER WHERE MemberID=".$memberId;
         $pdo->exec($sql);
+        
+        header("Location: /JGWentworth/View/Client.php");
     }
 
-        //header("Location: /JGWentworth/View/Client.php");
+        
 ?>
