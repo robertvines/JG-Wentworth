@@ -8,6 +8,8 @@
 ?>
     <script type="text/javascript">
 
+    
+
         $(document).ready(function () 
         {
             $('#div2').hide();
@@ -60,11 +62,13 @@
                 
                 var id = $(this).get(0).id;
     
-                document.getElementById('editID').innerHTML = id;
-                document.getElementById('editName').value = document.getElementById('showCompFName'+id).innerHTML;
-                document.getElementById('editDate').value = document.getElementById('dateBus'+id).innerHTML;
-                document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
-                document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
+                document.getElementById('editCompFName').value = document.getElementById('showCompFName'+id).innerHTML;
+                document.getElementById('editCompLName').value = document.getElementById('showCompLName'+id).innerHTML;
+                document.getElementById('editCompTitle').value = document.getElementById('showCompTitle'+id).innerHTML;
+                document.getElementById('editCompCompany').value = document.getElementById('showCompCompany'+id).innerHTML;
+                document.getElementById('editCompPhone').value = document.getElementById('showCompPhone'+id).innerHTML;
+                document.getElementById('editCompEmail').value = document.getElementById('showCompEmail'+id).innerHTML;
+                document.getElementById('editCompFContacted').value = document.getElementById('showCompFContact'+id).innerHTML;
                 document.getElementById('hiddenID').value = id;
             });
             
@@ -74,6 +78,19 @@
                 $('#create2').hide();
                 $('#edit1').hide();
                 $('#edit2').show();
+                
+                var id = $(this).get(0).id;
+
+                document.getElementById('showClientAddress'+id).style.cssText = 'visibility:hidden';
+
+                document.getElementById('editClientFName').value = document.getElementById('showClientFName'+id).innerHTML;
+                document.getElementById('editClientLName').value = document.getElementById('showClientLName'+id).innerHTML;
+                document.getElementById('editClientTitle').value = document.getElementById('showClientTitle'+id).innerHTML;
+                document.getElementById('editClientAddress').value = document.getElementById('showClientAddress'+id).innerHTML;
+                document.getElementById('editClientPhone').value = document.getElementById('showClientPhone'+id).innerHTML;
+                document.getElementById('editClientEmail').value = document.getElementById('showClientEmail'+id).innerHTML;
+                document.getElementById('editClientFContacted').value = document.getElementById('showClientFContact'+id).innerHTML;
+                document.getElementById('hiddenID').value = id;
             });
             
         });
@@ -96,6 +113,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Title</th>
+                            <th>Company</th>
                             <th>Phone</th>
                             <th>Email</th>
                             <th>First Contacted</th>
@@ -120,21 +138,23 @@
                                 $fContacted = $val['DateFirstContact'];
                                 $photo = $val['PhotoURL'];  
                                 
-                                $trimm = str_replace("C:/MAMP/htdocs","", $photo);
+                                $trimm = str_replace( $_SERVER["DOCUMENT_ROOT"],"", $photo);
+                                
                         ?>
                         <tr>
-                            <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
                             <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
                                     height: 39px;" /></td>
                             <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
                             <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
                             <td id="showCompTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
+                            <td id="showCompCompany<?php echo $memberId; ?>">
+                                <?php echo $companyId; ?></td>
                             <td id="showCompPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
                             <td id="showCompEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
                             <td id="showCompFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
                             <td><button class="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
                             <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
-                        </tr>                        
+                        </tr>     
                         <?php endwhile; ?>
                         </tbody>
                     </table>
@@ -173,19 +193,20 @@
                             $fContacted = $val['DateFirstContact'];
                             $photo = $val['PhotoURL'];  
                                 
-                                $trimm = str_replace("C:/MAMP/htdocs","", $photo);
+                                $trimm = str_replace($_SERVER["DOCUMENT_ROOT"],"", $photo);
                         ?>
                         <tr>
                             <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
                             <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
                                     height: 39px;" /></td>
-                            <td><?php echo $fName; ?></td>
-                            <td><?php echo $lName; ?></td>
-                            <td><?php echo $title; ?></td>
-                            <td><?php echo $phone; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $fContacted; ?></td>
-                            <td><button class="editClient" id="editClient">Edit</button></td>
+                            <td id="showClientFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
+                            <td id="showClientLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
+                            <td id="showClientTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
+                            <td id='showClientAddress<?php echo $memberId; ?>'><?php echo $address; ?></td>
+                            <td id="showClientPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
+                            <td id="showClientEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
+                            <td id="showClientFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
+                            <td><button class="editClient" id="<?php echo $memberId; ?>">Edit</button></td>
                             <td><a href="/JGWentworth/Controller/ClientController.php?delete_client=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>
                         <?php endwhile; ?>
@@ -307,18 +328,18 @@
                 
                 <!-- Edit Company Client -->
                 <div id="edit1">      
-                    <form method="post" action="/JGWentworth/Controller/ClientController.php">
+                    <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table id="column2">
                             <tr>
                                 <th colspan="2">Edit Company Client</th>
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="text" id='photo' /></td>
+                                <td><input type="file" id='editCompPhoto' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" name='editCompFName' /></td>
+                                <td><input type="text" id='editCompFName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
@@ -331,7 +352,7 @@
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select name='company' id="editCompany">
+                                    <select name='company' id="editCompCompany">
                                         <?php 
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
@@ -369,14 +390,14 @@
                 
                 <!-- Edit Client -->
                 <div id="edit2">
-                    <form method="post" action="/JGWentworth/Controller/ClientController.php">
+                    <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table id="column2">
                             <tr>
                                 <th colspan="2">Edit Client</th>
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="text" id='photo' /></td>
+                                <td><input type="file" id='editClientPhoto' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>

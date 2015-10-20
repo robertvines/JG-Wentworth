@@ -5,10 +5,11 @@
 
 #column1{
     float: left;
+    max-width: 75%;
 }
 
 #column2{
-    left: 40px;
+    left: 30px;
     position: relative;
 }
 
@@ -156,7 +157,7 @@ tbody {
 tbody, td {
     border-collapse: collapse; 
     padding-top: 3px;
-    padding-right: 15px;
+    padding-right: 13px;
     padding-bottom: 3px;
     padding-left: 5px;
     }
