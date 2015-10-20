@@ -25,7 +25,7 @@
                 <li><a href="Company.php">Company</a></li>
                 <li><a href="Client.php">Client</a></li>
                 
-                <li><a id="user" href="Logout.php">Log out</a></li>
+                <li><a id="user" href="/JGWentworth/View/Logout.php">Log out</a></li>
             </ul>    
         </div>
         <hr noshade />

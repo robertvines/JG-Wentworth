@@ -37,7 +37,9 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
             }// end second if
             
             if (isset($_GET['deleteCompany'])) {
-                echo 'passed this ID: '. $_GET['deleteCompany'];
+                $deleteID = $_GET['deleteCompany'];
+                
+                deleteCompany($deleteID);
                 
             }
             
