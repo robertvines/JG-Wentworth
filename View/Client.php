@@ -117,13 +117,13 @@
                             <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
                             <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
                                     height: 39px;" /></td>
-                            <td><?php echo $fName; ?></td>
-                            <td><?php echo $lName; ?></td>
-                            <td><?php echo $title; ?></td>
-                            <td><?php echo $phone; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $fContacted; ?></td>
-                            <td><button class="editCompClient" id="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
+                            <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
+                            <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
+                            <td id="showCompTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
+                            <td id="showCompPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
+                            <td id="showCompEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
+                            <td id="showCompFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
+                            <td><button class="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
                             <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
                         </tr>                        
                         <?php endwhile; ?>
