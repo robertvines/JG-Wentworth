@@ -8,9 +8,9 @@ Initial page to view companies
     include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
 <script src="JavaScript/companyViewJS.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 <body>
         <div id="page">
             <div id="body">
@@ -36,7 +36,8 @@ Initial page to view companies
 
                     ?>
                 <tr>
-                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button><button>Delete</button></td>
+                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button><a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
+                                                                                          onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a></td>
                     <td id="compID<?php echo $comID; ?>"><?php echo $comID; ?></td>
                     <td id="name<?php echo $comID; ?>"><?php echo $name; ?></td> 
                     <td id="dateBus<?php echo $comID; ?>"><?php echo $dateBus; ?></td>

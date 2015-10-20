@@ -12,7 +12,7 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
         <p>paragraph</p>
         <div id="page">
             <?php 
-            if (!empty($_POST['edit-submit'])) {
+            if (isset($_POST['edit-submit'])) {
                     
                     // retrieve posted data
                     $id = $_POST['editID'];
@@ -26,7 +26,7 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
                     
             }// end first if
 
-            if (!empty($_POST['create-submit'])) {
+            if (isset($_POST['create-submit'])) {
     echo 'made it inside the if statement';
                     $newName = $_POST['newCompName'];
                     $newType = $_POST['newBusiness'];
@@ -36,6 +36,9 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
                     createCompany($newName, $newType, $newDate, $newAddress);
             }// end second if
             
+            if (isset($_POST['deleteCompany'])) {
+                echo 'passed this ID: '. $_POST['deleteCompany'];
+            }
             
     function updateCompany($id, $name, $type, $dateBusiness, $compAdd )
     {
