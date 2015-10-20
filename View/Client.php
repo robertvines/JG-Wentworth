@@ -57,6 +57,15 @@
                 $('#create2').hide();
                 $('#edit1').show();
                 $('#edit2').hide();
+                
+                var id = $(this).get(0).id;
+    
+                document.getElementById('editID').innerHTML = id;
+                document.getElementById('editName').value = document.getElementById('showCompFName'+id).innerHTML;
+                document.getElementById('editDate').value = document.getElementById('dateBus'+id).innerHTML;
+                document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
+                document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
+                document.getElementById('hiddenID').value = id;
             });
             
             $('.editClient').click(function ()
