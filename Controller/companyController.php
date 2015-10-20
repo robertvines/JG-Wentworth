@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <?php
 /* 
  * @author John Cochran
@@ -36,8 +36,9 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
                     createCompany($newName, $newType, $newDate, $newAddress);
             }// end second if
             
-            if (isset($_POST['deleteCompany'])) {
-                echo 'passed this ID: '. $_POST['deleteCompany'];
+            if (isset($_GET['deleteCompany'])) {
+                echo 'passed this ID: '. $_GET['deleteCompany'];
+                
             }
             
     function updateCompany($id, $name, $type, $dateBusiness, $compAdd )
@@ -86,6 +87,28 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
                 }//end try catch
         
     }// end function createCompany()
+    
+    function deleteCompany($id){
+      try{  
+        $user = 'sql591897';
+        $password = 'hA5!kQ4%';  
+        $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+         
+        $pdo = new PDO($conn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $sql = "DELETE FROM sql591897.COMPANY
+                    WHERE CompanyID = ". $id;
+        
+        if ($pdo->query($sql) == TRUE) {
+                        echo "Company deleted successfully";
+                    } else {
+                        echo "An error occurred while deleting the record : " . $pdo->error;
+                    }
+                } catch (Exception $ex) {
+                }//end try catch
+        
+    }// end function deleteCompany()
             ?>
         </div>
     </body>
