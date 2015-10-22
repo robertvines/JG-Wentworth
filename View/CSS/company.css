@@ -8,3 +8,30 @@ and open the template in the editor.
     Author     : John Cochran
 */
 
+//body { color: blue;
+//       position: relative};
+
+.table-wrapper {
+    float: left;
+    overflow-x:scroll;
+    overflow-y:visible;
+    width:50%;
+    //margin-left: 120px;
+}
+
+
+td, th {
+   // padding: 5px 20px;
+   // width: 100px;
+}
+
+//th:first-child, :second-child {
+//    position: absolute;
+//    left: 5px
+//}
+
+#right-side {
+    float: right;
+    
+}
+

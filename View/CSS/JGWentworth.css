@@ -2,21 +2,13 @@
     Created on : Jul 12, 2015, 3:12:17 PM
     Author     : Robert Vines
 */
-/* Hide things on pages */
-.hidden{
-    display: none;
-}
 
-/* create a left column */
 #column1{
     float: left;
-    max-width: 75%;
 }
 
-/* Create a right column */
-
 #column2{
-    left: 30px;
+    left: 40px;
     position: relative;
 }
 
@@ -93,7 +85,7 @@ a:visited {
 
 /* Every page, grey */
 #page {
-    position: relative;
+  //  position: relative;
     top: 74px;
     left:0;
     background: none repeat 0 0 #E8E8E8;
@@ -103,7 +95,6 @@ a:visited {
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 25px;
-    position: fixed;
     text-align: left;
     width: 100%;   
     overflow-y: scroll;
@@ -164,7 +155,7 @@ tbody {
 tbody, td {
     border-collapse: collapse; 
     padding-top: 3px;
-    padding-right: 13px;
+    padding-right: 15px;
     padding-bottom: 3px;
     padding-left: 5px;
     }
