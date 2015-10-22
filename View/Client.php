@@ -331,24 +331,24 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="file" id='editCompPhoto' /></td>
+                                <td><input type="file" id='editCompPhoto' name='editCompPhoto' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='editCompFName' /></td>
+                                <td><input type="text" id='editCompFName' name='editCompFName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" id='editCompLName' /></td>
+                                <td><input type="text" id='editCompLName' name='editCompLName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" id='editCompTitle' /></td>
+                                <td><input type="text" id='editCompTitle' name='editCompTitle' /></td>
                             </tr>
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select name='company' id="editCompCompany">
+                                    <select name='company' id="editCompCompany" name="editCompCompany">
                                         <?php 
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
@@ -366,19 +366,19 @@
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='editCompPhone' /></td>
+                                <td><input type="text" id='editCompPhone' name='editCompPhone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" id='editCompEmail' /></td>
+                                <td><input type="email" id='editCompEmail' name='editCompEmail' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted<br>yyyy-mm-dd:</td>
-                                <td><input type="text" id='editCompFContacted' /></td>
+                                <td><input type="text" id='editCompFContacted' name='editCompFContacted' /></td>
                             </tr>
                             <tr>
-                                <td><input type="hidden" id="hiddenID" name="editID"></td>
-                                <td><input type="submit" value="Save Company Client" id="client" /></td>
+                                <td><input type="hidden" id="hiddenID" name="editCompID"></td>
+                                <td><input type="submit" name='editCompClient' value="Save" /></td>
                             </tr>
                         </table>
                     </form>
@@ -424,8 +424,8 @@
                                 <td><input type="text" id='editClientFContacted' /></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td><input type="submit" value="Save Client" id="client" /></td>
+                                <td><input type="hidden" id="hiddenID" name="editClientID"></td>
+                                <td><input type="submit" value="Save" name="editNoCompClient" /></td>
                             </tr>
                         </table>
                     </form>

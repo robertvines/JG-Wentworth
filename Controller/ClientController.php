@@ -76,6 +76,113 @@
         header("Location: /JGWentworth/View/Client.php");
     }
     
+    if (isset($_POST['editCompClient']))
+    {
+        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_file = $target_dir . basename($_FILES['editCompPhoto']['name']);
+        
+                $compClientId = $_POST['editCompID'];
+                $editCompFName = $_POST['editCompFName'];
+                $editCompLName = $_POST['editCompLName'];
+                $editCompCompany = $_POST['editCompCompany'];
+                $editCompTitle = $_POST['editCompTitle'];
+                $editCompEmail = $_POST['editCompEmail'];
+                $editCompPhone = $_POST['editCompPhone'];
+                $editCompAddress = $_POST['editCompAddress'];
+                $editCompFContacted = $_POST['editCompFContacted'];
+                
+                if(!empty($editCompCompany))
+                {
+                    $sql = "SELECT CompanyID FROM COMPANY WHERE Name=".$editCompCompany;
+                    $result = $pdo->query($sql);
+
+                    $val=$result->fetch();
+
+                    $companyID = $val['CompanyID'];
+                    
+                }
+                if(empty($editCompCompany))
+                {
+                    $companyID = NULL;
+                }
+        
+            if (!empty($target_file))
+            {
+                try {
+                (move_uploaded_file($_FILES['editCompPhoto']['tmp_name'], $target_file));
+                
+                
+                
+                    $sql = "UPDATE COMPANY_MEMBER "
+                        . "SET CompanyID ='".$companyID."', FirstName ='".$editCompFName."', "
+                        . "LastName ='".$editCompLName."', Title ='".$editCompTitle."', "
+                        . "Phone ='".$editCompPhone."', Email ='".$editCompEmail."', "
+                        . "DateFirstContact ='".$editCompFContacted."', PhotoURL ='".$target_file."' "
+                        . "WHERE MemberID ='".$compClientId."';";
+                    $pdo->query($sql);
+                    } catch (Exception $ex) {
+        echo 'Connection Failed: ' . $ex->getMessage();
+    }
+            }
+            if (empty($target_file))
+            {
+                
+                $sql = "UPDATE COMPANY_MEMBER "
+                    . "SET CompanyID = '".$companyID."', FirstName = '".$editCompFName."', "
+                        . "LastName = '".$editCompLName."', Title ='".$editCompTitle.", "
+                        . "Phone = '".$editCompPhone."', Email = '".$editCompEmail."', "
+                        . "DateFirstContact = '".$editCompFContacted."' "
+                        . "WHERE MemberID ='".$compClientId."';";
+                    $pdo->query($sql);
+            }
+            
+            
+        //header("Location: /JGWentworth/View/Client.php");
+    }
+    
+    if (isset($_POST['editNoCompClient']))
+    {
+        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_file = $target_dir . basename($_FILES['editCompPhoto']['name']);
+        
+                $compClientId = $_POST['editClientID'];
+                $editClientFName = $_POST['editClientFName'];
+                $editClientLName = $_POST['editClientLName'];
+                $editClientCompany = $_POST['editClientAddress'];
+                $editClientTitle = $_POST['editClientTitle'];
+                $editClientEmail = $_POST['editClientEmail'];
+                $editClientPhone = $_POST['editClientPhone'];
+                $editClientAddress = $_POST['editClientAddress'];
+                $editClientFContacted = $_POST['editClientFContacted'];
+        
+            if (!empty($target_file))
+            {
+                (move_uploaded_file($_FILES['editCompPhoto']['tmp_name'], $target_file));
+                
+                    $sql = "UPDATE NON_MEMBER "
+                        . "SET CompanyID ='".$companyID."', FirstName ='".$editCompFName."', "
+                        . "LastName ='".$editCompLName."', Title ='".$editCompTitle."', "
+                        . "Phone ='".$editCompPhone."', Email ='".$editCompEmail."', "
+                        . "DateFirstContact ='".$editCompFContacted."', PhotoURL ='".$target_file."' "
+                        . "WHERE MemberID ='".$compClientId."';";
+                    $pdo->query($sql);
+            }
+            if (empty($target_file))
+            {
+                
+                $sql = "UPDATE NON_MEMBER "
+                    . "SET CompanyID = '".$companyID."', FirstName = '".$editCompFName."', "
+                        . "LastName = '".$editCompLName."', Title ='".$editCompTitle.", "
+                        . "Phone = '".$editCompPhone."', Email = '".$editCompEmail."', "
+                        . "DateFirstContact = '".$editCompFContacted."' "
+                        . "WHERE MemberID ='".$compClientId."';";
+                    $pdo->query($sql);
+            }
+            
+            
+        //header("Location: /JGWentworth/View/Client.php");
+    }
+    
     if(isset($_GET['delete_compClient']))
     { 
         $memberId = $_GET['delete_compClient'];
