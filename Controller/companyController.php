@@ -14,6 +14,7 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
             <?php 
             if (isset($_POST['edit-submit'])) {
                     
+              
                     // retrieve posted data
                     $id = $_POST['editID'];
                     $name = $_POST['editName'];
@@ -111,6 +112,11 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
                 }//end try catch
         
     }// end function deleteCompany()
+    
+    function testData($data){
+        $data = trim($data);
+        return $data;
+    }// end function 
             ?>
         </div>
     </body>

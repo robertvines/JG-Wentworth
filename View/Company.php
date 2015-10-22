@@ -19,8 +19,6 @@ Initial page to view companies
               $( '#form-B' ).hide();
          }
          $('#hiddenID').hide();
-         
-      //   $("#datepicker").datepicker();
  
      });
      /* *************************************************************************
@@ -33,7 +31,7 @@ Initial page to view companies
               $( '#form-A' ).hide();
          }
          
-    //     $("#newDate").datepicker();
+       $('#newDate').datepicker({dateFormat: "yy-mm-dd"});
         });
  
         $('.editCom').click(function(){ 
@@ -42,6 +40,8 @@ Initial page to view companies
             if($( '#form-B' ).is(":visible")){
               $( '#form-B' ).hide();
          }
+         
+         $('#editDate').datepicker({dateFormat: "yy-mm-dd"});
      //    document.getElementById('createName').focus();
          
          //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
@@ -74,38 +74,41 @@ Initial page to view companies
 </script>
 
 <style>
-
 .table-wrapper {
     float: left;
     overflow-x:scroll;
     overflow-y:visible;
-    //width:65%;
-    max-width: 700px;
+    max-width: 65%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 th, td {
   white-space: nowrap;
 }
 
-th:first-child {
-   position: absolute;
-  //  left: 5px;
+ th:first-child {
+ //  position: absolute;
+    //left: 5px;
   //  color: red;
 }
+th:nth-child(2){
+   // position: fixed;
+}
+
 #right-side {
     float: right;
     margin-left: auto;
     margin-right: auto;
-    
-    
 }
 </style>
 <body>
         <div id="page">
             <div id="body">
             <h1>Companies</h1>
+            <input type="text" id="datepicker"/>
             <div>
                 <button id="createCom" class="button">Create new Company</button>
             </div>
@@ -142,7 +145,7 @@ th:first-child {
             </table>
             </div>
      <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
-          <div id="right-side">
+          <div id="column2">
             <div id="form-A">
                 <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
@@ -152,7 +155,7 @@ th:first-child {
                             <tr><td>ID:</td> <td id="editID"></td></tr>
                             <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
-                            <tr><td>Date of First Business</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
+                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
                             <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
                         </table>
                         <input type="text" id="hiddenID" name="editID">
@@ -169,7 +172,7 @@ th:first-child {
                         <table>
                             <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
-                            <tr><td>Date of First Business</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
+                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
                         <input type="submit" name="create-submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>
