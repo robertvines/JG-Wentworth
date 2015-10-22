@@ -15,8 +15,8 @@
               $( '#form-B' ).hide();
          }
          $('#hiddenID').hide();
-          
-    //    $( '#editAddres, #newDate' ).datepicker();
+         
+         $("#datepicker").datepicker();
  
      });
      /* *************************************************************************
@@ -28,6 +28,8 @@
             if($( '#form-A' ).is(":visible")){
               $( '#form-A' ).hide();
          }
+         
+    //     $("#newDate").datepicker();
         });
  
         $('.editCom').click(function(){ 
@@ -62,7 +64,8 @@
        
         $('#hideEdit').click(function(){
             $('#form-A').hide();  
-         });  
+         });
+         
     });// end documet.ready function   
 
 

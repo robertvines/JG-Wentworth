@@ -8,18 +8,43 @@ Initial page to view companies
     include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
 <script src="JavaScript/companyViewJS.js"></script>
-<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
+
+
+
+<style>
+
+.table-wrapper {
+    float: left;
+    overflow-x:scroll;
+    //overflow-y:visible;
+    width:65%;
+    //margin-left: 120px;
+}
+
+td, th {
+  //  width: 100px;
+}
+
+th:first-child {
+    position: absolute;
+    left: 5px;
+    color: red;
+}
+#right-side {
+    float: right;
+    
+}
+</style>
 <body>
         <div id="page">
             <div id="body">
+                <input type="text" id="datepicker">
             <h1>Companies</h1>
             <div>
                 <button id="createCom" class="button">Create new Company</button>
             </div>
-            
-            <table id="will_be_assigned">
+            <div class="table-wrapper">
+            <table>
                 <tr>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
@@ -49,8 +74,9 @@ Initial page to view companies
                 endwhile;
                 ?>
             </table>
+            </div>
      <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
-          <div id="will_be_assigned">
+          <div id="right-side">
             <div id="form-A">
                 <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
