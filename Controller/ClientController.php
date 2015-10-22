@@ -79,7 +79,7 @@
     if (isset($_POST['editCompClient']))
     {
         $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
-        $target_file = $target_dir . basename($_FILES['editCompPhoto']['name']);
+        $target_file = $target_dir . basename($_FILES['editClientPhoto']['name']);
         
                 $compClientId = $_POST['editCompID'];
                 $editCompFName = $_POST['editCompFName'];
@@ -136,8 +136,7 @@
                     $pdo->query($sql);
             }
             
-            
-        //header("Location: /JGWentworth/View/Client.php");
+        header("Location: /JGWentworth/View/Client.php");
     }
     
     if (isset($_POST['editNoCompClient']))
@@ -157,30 +156,29 @@
         
             if (!empty($target_file))
             {
-                (move_uploaded_file($_FILES['editCompPhoto']['tmp_name'], $target_file));
+                (move_uploaded_file($_FILES['editClientPhoto']['tmp_name'], $target_file));
                 
                     $sql = "UPDATE NON_MEMBER "
-                        . "SET CompanyID ='".$companyID."', FirstName ='".$editCompFName."', "
-                        . "LastName ='".$editCompLName."', Title ='".$editCompTitle."', "
-                        . "Phone ='".$editCompPhone."', Email ='".$editCompEmail."', "
-                        . "DateFirstContact ='".$editCompFContacted."', PhotoURL ='".$target_file."' "
-                        . "WHERE MemberID ='".$compClientId."';";
+                        . "SET FirstName ='".$editCompFName."', LastName ='".$editCompLName."', "
+                        . "Title ='".$editCompTitle."', Email ='".$editCompEmail."', Phone ='".$editCompPhone."',  "
+                        . "Address = '".$editClientAddress."', DateFirstContact ='".$editCompFContacted."', "
+                        . "PhotoURL ='".$target_file."' "
+                        . "WHERE MemberID ='".$editClientID."';";
                     $pdo->query($sql);
             }
             if (empty($target_file))
             {
                 
                 $sql = "UPDATE NON_MEMBER "
-                    . "SET CompanyID = '".$companyID."', FirstName = '".$editCompFName."', "
+                    . "SET FirstName = '".$editCompFName."', "
                         . "LastName = '".$editCompLName."', Title ='".$editCompTitle.", "
-                        . "Phone = '".$editCompPhone."', Email = '".$editCompEmail."', "
-                        . "DateFirstContact = '".$editCompFContacted."' "
-                        . "WHERE MemberID ='".$compClientId."';";
+                        . "Email = '".$editCompEmail."', Phone = '".$editCompPhone."',  "
+                        . "Address = '".$editClientAddress."', DateFirstContact = '".$editCompFContacted."' "
+                        . "WHERE MemberID ='".$editClientID."';";
                     $pdo->query($sql);
             }
             
-            
-        //header("Location: /JGWentworth/View/Client.php");
+        header("Location: /JGWentworth/View/Client.php");
     }
     
     if(isset($_GET['delete_compClient']))

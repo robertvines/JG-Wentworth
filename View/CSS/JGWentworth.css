@@ -3,6 +3,10 @@
     Author     : Robert Vines
 */
 
+.hidden{
+    display: none;
+}
+
 #column1{
     float: left;
 }

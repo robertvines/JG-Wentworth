@@ -393,35 +393,35 @@
                             </tr>
                             <tr>
                                 <td>Photo:</td>
-                                <td><input type="file" id='editClientPhoto' /></td>
+                                <td><input type="file" id='editClientPhoto' name='editClientPhoto' /></td>
                             </tr>
                             <tr>
                                 <td>First Name:</td>
-                                <td><input type="text" id='editClientFName' /></td>
+                                <td><input type="text" id='editClientFName' name='editClientFName' /></td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
-                                <td><input type="text" id='editClientLName' /></td>
+                                <td><input type="text" id='editClientLName' name='editClientLName' /></td>
                             </tr>
                             <tr>
                                 <td>Title:</td>
-                                <td><input type="text" id='editClientTitle' /></td>
+                                <td><input type="text" id='editClientTitle' name='editClientTitle' /></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='editClientPhone' /></td>
+                                <td><input type="text" id='editClientPhone' name='editClientPhone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input type="email" id='editClientEmail' /></td>
+                                <td><input type="email" id='editClientEmail' name='editClientEmail' /></td>
                             </tr>
                             <tr>
                                 <td>Address:</td>
-                                <td><input type="text" id='editClientAddress' /></td>
+                                <td><input type="text" id='editClientAddress' name='editClientAddress' /></td>
                             </tr>
                             <tr>
                                 <td>First Contacted<br>yyyy-mm-dd:</td>
-                                <td><input type="text" id='editClientFContacted' /></td>
+                                <td><input type="text" id='editClientFContacted' name='editClientFContacted' /></td>
                             </tr>
                             <tr>
                                 <td><input type="hidden" id="hiddenID" name="editClientID"></td>
