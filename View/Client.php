@@ -424,8 +424,8 @@
                                 <td><input type="text" id='editClientFContacted' /></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td><input type="submit" value="Save Client" id="client" /></td>
+                                <td><input type="hidden" id="hiddenID" name="editClientID"></td>
+                                <td><input type="submit" value="Save" name="editNoCompClient" /></td>
                             </tr>
                         </table>
                     </form>
