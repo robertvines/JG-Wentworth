@@ -11,7 +11,7 @@
         //create company client
     if (isset($_POST['createCompClient']))
     {
-        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_dir = '/JGWentworth/ClientImages/';
         $target_file = $target_dir . basename($_FILES['compPhoto']['name']);
       
             if (move_uploaded_file($_FILES['compPhoto']['tmp_name'], $target_file)) //if file is moved to folder
@@ -50,7 +50,7 @@
     if (isset($_POST['createClient']))
     {
         //create client
-        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_dir = '/JGWentworth/ClientImages/';
         $target_file = $target_dir . basename($_FILES['clientPhoto']['name']);
       
             if (move_uploaded_file($_FILES['clientPhoto']['tmp_name'], $target_file)) //if file is moved to folder
@@ -78,7 +78,7 @@
     
     if (isset($_POST['editCompClient']))
     {
-        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
+        $target_dir = '/JGWentworth/ClientImages/';
         $target_file = $target_dir . basename($_FILES['editClientPhoto']['name']);
         
                 $compClientId = $_POST['editCompID'];
@@ -141,8 +141,8 @@
     
     if (isset($_POST['editNoCompClient']))
     {
-        $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
-        $target_file = $target_dir . basename($_FILES['editCompPhoto']['name']);
+        $target_dir = '/JGWentworth/ClientImages/';
+        $target_file = $target_dir . basename($_FILES['editClientPhoto']['name']);
         
                 $compClientId = $_POST['editClientID'];
                 $editClientFName = $_POST['editClientFName'];

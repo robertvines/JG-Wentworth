@@ -134,11 +134,9 @@
                                 $fContacted = $val['DateFirstContact'];
                                 $photo = $val['PhotoURL'];  
                                 
-                                $trimm = str_replace( $_SERVER["DOCUMENT_ROOT"],"", $photo);
-                                
                         ?>
                         <tr>
-                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
+                            <td><img src="<?php echo $photo; ?>" alt="N/A" style="width: 29px;
                                     height: 39px;" /></td>
                             <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
                             <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
@@ -189,11 +187,10 @@
                             $fContacted = $val['DateFirstContact'];
                             $photo = $val['PhotoURL'];  
                                 
-                                $trimm = str_replace($_SERVER["DOCUMENT_ROOT"],"", $photo);
                         ?>
                         <tr>
                             <input type="hidden" id="CompClientId" value="<?php echo $memberId; ?>" />
-                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
+                            <td><img src="<?php echo $photo; ?>" alt="N/A" style="width: 29px;
                                     height: 39px;" /></td>
                             <td id="showClientFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
                             <td id="showClientLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
