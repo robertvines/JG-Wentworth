@@ -7,38 +7,104 @@ Initial page to view companies
     include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
     include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
-<script src="JavaScript/companyViewJS.js"></script>
-
-
+<script>
+/* *************************************************************************
+     * Initially hide forms on page load    
+     */
+     $(document).ready(function() {     
+         if($( '#form-A' ).is(":visible")){
+              $( '#form-A' ).hide();
+         }
+         if($( '#form-B' ).is(":visible")){
+              $( '#form-B' ).hide();
+         }
+         $('#hiddenID').hide();
+         
+      //   $("#datepicker").datepicker();
+ 
+     });
+     /* *************************************************************************
+     * Shows the form that the user selects, hide the other if it is visible
+     */
+    $(document).ready(function() {
+        $('#createCom').click(function(){
+            $('#form-B').show();
+            if($( '#form-A' ).is(":visible")){
+              $( '#form-A' ).hide();
+         }
+         
+    //     $("#newDate").datepicker();
+        });
+ 
+        $('.editCom').click(function(){ 
+            // SHOW THE EDIT FORM, HIDE CREATE FORM
+            $('#form-A').show();
+            if($( '#form-B' ).is(":visible")){
+              $( '#form-B' ).hide();
+         }
+     //    document.getElementById('createName').focus();
+         
+         //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
+            var id = $(this).get(0).id;
+    
+            document.getElementById('editID').innerHTML = id;
+            document.getElementById('editName').value = document.getElementById('name'+id).innerHTML;
+            document.getElementById('editDate').value = document.getElementById('dateBus'+id).innerHTML;
+            document.getElementById('editType').value = document.getElementById('type'+id).innerHTML;
+            document.getElementById('editAddress').value = document.getElementById('address'+id).innerHTML;
+            document.getElementById('hiddenID').value = id;
+            
+      //      document.getElementById('editName').focus();
+        });
+        
+        //Select the text inside the textbox when it has focus
+        $('#editName, #editType, #editDate, #editAddress').click( function(){
+            $(this).select();
+        });
+       // hide the form when the user clicks the hide form button
+       $('#hideCreate').click(function(){
+            $('#form-B').hide(); 
+         });
+       
+        $('#hideEdit').click(function(){
+            $('#form-A').hide();  
+         });
+         
+    });// end documet.ready function   
+</script>
 
 <style>
 
 .table-wrapper {
     float: left;
     overflow-x:scroll;
-    //overflow-y:visible;
-    width:65%;
-    //margin-left: 120px;
+    overflow-y:visible;
+    //width:65%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-td, th {
-  //  width: 100px;
+th, td {
+  white-space: nowrap;
 }
 
 th:first-child {
-    position: absolute;
-    left: 5px;
-    color: red;
+   position: absolute;
+  //  left: 5px;
+  //  color: red;
 }
 #right-side {
     float: right;
+    margin-left: auto;
+    margin-right: auto;
+    
     
 }
 </style>
 <body>
         <div id="page">
             <div id="body">
-                <input type="text" id="datepicker">
             <h1>Companies</h1>
             <div>
                 <button id="createCom" class="button">Create new Company</button>
