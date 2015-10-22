@@ -85,7 +85,7 @@ a:visited {
 
 /* Every page, grey */
 #page {
-  //  position: relative;
+    position: absolute;
     top: 74px;
     left:0;
     background: none repeat 0 0 #E8E8E8;
