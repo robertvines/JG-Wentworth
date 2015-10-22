@@ -2,11 +2,18 @@
     Created on : Jul 12, 2015, 3:12:17 PM
     Author     : Robert Vines
 */
+/* Hide things on pages */
+.hidden{
+    display: none;
+}
 
+/* create a left column */
 #column1{
     float: left;
     max-width: 75%;
 }
+
+/* Create a right column */
 
 #column2{
     left: 30px;

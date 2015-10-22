@@ -8,8 +8,6 @@
 ?>
     <script type="text/javascript">
 
-    
-
         $(document).ready(function () 
         {
             $('#div2').hide();
@@ -80,8 +78,6 @@
                 $('#edit2').show();
                 
                 var id = $(this).get(0).id;
-
-                document.getElementById('showClientAddress'+id).style.cssText = 'visibility:hidden';
 
                 document.getElementById('editClientFName').value = document.getElementById('showClientFName'+id).innerHTML;
                 document.getElementById('editClientLName').value = document.getElementById('showClientLName'+id).innerHTML;
@@ -202,7 +198,7 @@
                             <td id="showClientFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
                             <td id="showClientLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
                             <td id="showClientTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
-                            <td id='showClientAddress<?php echo $memberId; ?>'><?php echo $address; ?></td>
+                            <td class='hidden' id='showClientAddress<?php echo $memberId; ?>'><?php echo $address; ?></td>
                             <td id="showClientPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
                             <td id="showClientEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
                             <td id="showClientFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
