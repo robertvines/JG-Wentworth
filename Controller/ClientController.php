@@ -79,7 +79,7 @@
     if (isset($_POST['editCompClient']))
     {
         $target_dir = $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/ClientImages/';
-        $target_file = $target_dir . basename($_FILES['editClientPhoto']['name']);
+        $target_file = $target_dir . basename($_FILES['editCompPhoto']['name']);
         
                 $compClientId = $_POST['editCompID'];
                 $editCompFName = $_POST['editCompFName'];
@@ -110,8 +110,6 @@
             {
                 try {
                 (move_uploaded_file($_FILES['editCompPhoto']['tmp_name'], $target_file));
-                
-                
                 
                     $sql = "UPDATE COMPANY_MEMBER "
                         . "SET CompanyID ='".$companyID."', FirstName ='".$editCompFName."', "
@@ -156,7 +154,7 @@
         
             if (!empty($target_file))
             {
-                (move_uploaded_file($_FILES['editClientPhoto']['tmp_name'], $target_file));
+                (move_uploaded_file($_FILES['editNoCompPhoto']['tmp_name'], $target_file));
                 
                     $sql = "UPDATE NON_MEMBER "
                         . "SET FirstName ='".$editCompFName."', LastName ='".$editCompLName."', "
