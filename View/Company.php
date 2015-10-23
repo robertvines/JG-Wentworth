@@ -74,11 +74,18 @@ Initial page to view companies
 </script>
 
 <style>
+#form-wrapper{
+       margin-bottom: 25px; 
+       width: 50%;
+       min-width: 300px;
+    }
+    
 .table-wrapper {
     float: left;
     overflow-x:scroll;
     overflow-y:visible;
-    max-width: 65%;
+    width: 90%;
+    min-width: 300px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -97,21 +104,57 @@ th, td {
 th:nth-child(2){
    // position: fixed;
 }
-
-#right-side {
-    float: right;
-    margin-left: auto;
-    margin-right: auto;
+legend {
+    font-weight: bold;
+    font-size: 18px;
 }
 </style>
 <body>
         <div id="page">
             <div id="body">
-            <h1>Companies</h1>
-            <input type="text" id="datepicker"/>
-            <div>
-                <button id="createCom" class="button">Create new Company</button>
+                <label class="title">COMPANY</label>
+  
+            <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
+          <div id="form-wrapper">
+            <div id="form-A">
+                <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
+                    <fieldset>
+                        <legend>Edit a Company</legend>
+                        
+                        <table style="margin-bottom: 5px;">
+                            <tr><td>ID:</td> <td id="editID"></td></tr>
+                            <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
+                            <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
+                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
+                            <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
+                        </table>
+                        <input type="text" id="hiddenID" name="editID">
+                        <input type="submit" name="edit-submit" class="btnsmall" value="Submit"> <button id='hideEdit' class="btnsmall" type="button">Cancel</button>
+                    </fieldset>
+                </form>
             </div>
+      <!-- FORM THAT ALLOWS A USER TO CREATE A NEW COMPANY -->      
+            <div id="form-B">
+                <form id="createForm" method="post" action="/JGWentworth/Controller/companyController.php">
+                    <fieldset>
+                        <legend>Create a Company</legend>
+                        
+                        <table style="margin-bottom: 5px;">
+                            <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
+                            <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
+                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
+                            <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
+                        </table>
+                        <input type="submit" name="create-submit" value="Submit" class="btnsmall"> <button id='hideCreate' class="btnsmall" type="button">Cancel</button>
+                    </fieldset>
+                </form>
+            </div>
+          </div>    
+                
+          <div>
+             <button id="createCom" class="btn">Create New Company</button>
+          </div>      
+                
             <div class="table-wrapper">
             <table>
                 <tr>
@@ -127,11 +170,14 @@ th:nth-child(2){
                     $dateBus = $val['DateFirstBusiness'];
                     $busType = $val['BusinessType'];
                     $address = $val['Address'];
-
                     ?>
                 <tr>
-                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button><a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
-                                                                                          onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a></td>
+                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
+                        <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
+                        onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
+                        <a href="/JGWentworth/Controller/?viewID=<?php echo $comID; ?>" 
+                        onclick="return confirm('Are you sure you want to leave this page?');"><input type="submit" value="View Employees"></a>
+                    </td>
                     <td id="compID<?php echo $comID; ?>"><?php echo $comID; ?></td>
                     <td id="name<?php echo $comID; ?>"><?php echo $name; ?></td> 
                     <td id="dateBus<?php echo $comID; ?>"><?php echo $dateBus; ?></td>
@@ -144,42 +190,6 @@ th:nth-child(2){
                 ?>
             </table>
             </div>
-     <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
-          <div id="column2">
-            <div id="form-A">
-                <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
-                    <fieldset>
-                        <legend>Edit a Company</legend>
-                        
-                        <table>
-                            <tr><td>ID:</td> <td id="editID"></td></tr>
-                            <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
-                            <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
-                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
-                            <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
-                        </table>
-                        <input type="text" id="hiddenID" name="editID">
-                        <input type="submit" name="edit-submit" value="Submit"> <button id='hideEdit' type="button">Cancel</button>
-                    </fieldset>
-                </form>
-            </div>
-      <!-- FORM THAT ALLOWS A USER TO CREATE A NEW COMPANY -->      
-            <div id="form-B">
-                <form id="createForm" method="post" action="/JGWentworth/Controller/companyController.php">
-                    <fieldset>
-                        <legend>Create a Company</legend>
-                        
-                        <table>
-                            <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
-                            <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
-                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
-                            <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
-                        </table>
-                        <input type="submit" name="create-submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>
-                    </fieldset>
-                </form>
-            </div>
-          </div>
          </div>     
        </div>
     </body>
