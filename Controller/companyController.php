@@ -8,8 +8,7 @@ include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
 
 
 ?>
-    <body>
-        <p>paragraph</p>
+    <body>    
         <div id="page">
             <?php 
             if (isset($_POST['edit-submit'])) {

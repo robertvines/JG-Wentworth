@@ -107,10 +107,9 @@ th:nth-child(2){
 <body>
         <div id="page">
             <div id="body">
-            <h1>Companies</h1>
-            <input type="text" id="datepicker"/>
+                <label class="title">COMPANY</label>
             <div>
-                <button id="createCom" class="button">Create new Company</button>
+                <button id="createCom" class="btn">Create New Company</button>
             </div>
             <div class="table-wrapper">
             <table>
@@ -127,7 +126,6 @@ th:nth-child(2){
                     $dateBus = $val['DateFirstBusiness'];
                     $busType = $val['BusinessType'];
                     $address = $val['Address'];
-
                     ?>
                 <tr>
                     <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button><a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
@@ -151,7 +149,7 @@ th:nth-child(2){
                     <fieldset>
                         <legend>Edit a Company</legend>
                         
-                        <table>
+                        <table style="margin-bottom: 5px;">
                             <tr><td>ID:</td> <td id="editID"></td></tr>
                             <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
@@ -159,7 +157,7 @@ th:nth-child(2){
                             <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
                         </table>
                         <input type="text" id="hiddenID" name="editID">
-                        <input type="submit" name="edit-submit" value="Submit"> <button id='hideEdit' type="button">Cancel</button>
+                        <input type="submit" name="edit-submit" class="btnsmall" value="Submit"> <button id='hideEdit' class="btnsmall" type="button">Cancel</button>
                     </fieldset>
                 </form>
             </div>
@@ -169,13 +167,13 @@ th:nth-child(2){
                     <fieldset>
                         <legend>Create a Company</legend>
                         
-                        <table>
+                        <table style="margin-bottom: 5px;">
                             <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
                             <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
-                        <input type="submit" name="create-submit" value="Submit"> <button id='hideCreate' type="button">Cancel</button>
+                        <input type="submit" name="create-submit" value="Submit" class="btnsmall"> <button id='hideCreate' class="btnsmall" type="button">Cancel</button>
                     </fieldset>
                 </form>
             </div>
