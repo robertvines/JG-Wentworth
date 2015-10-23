@@ -74,11 +74,18 @@ Initial page to view companies
 </script>
 
 <style>
+#form-wrapper{
+       margin-bottom: 25px; 
+       width: 50%;
+       min-width: 300px;
+    }
+    
 .table-wrapper {
     float: left;
     overflow-x:scroll;
     overflow-y:visible;
-    max-width: 65%;
+    width: 90%;
+    min-width: 300px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -97,53 +104,18 @@ th, td {
 th:nth-child(2){
    // position: fixed;
 }
-
-#right-side {
-    float: right;
-    margin-left: auto;
-    margin-right: auto;
+legend {
+    font-weight: bold;
+    font-size: 18px;
 }
 </style>
 <body>
         <div id="page">
             <div id="body">
                 <label class="title">COMPANY</label>
-            <div>
-                <button id="createCom" class="btn">Create New Company</button>
-            </div>
-            <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
-                
-                <?php 
-                $sql = "SELECT * FROM COMPANY;";
-                $result = $pdo->query($sql); 
-                
-                while($val=$result->fetch()):
-                   $comID = $val['CompanyID'];
-                    $name = $val['Name'];
-                    $dateBus = $val['DateFirstBusiness'];
-                    $busType = $val['BusinessType'];
-                    $address = $val['Address'];
-                    ?>
-                <tr>
-                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button><a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
-                                                                                          onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a></td>
-                    <td id="compID<?php echo $comID; ?>"><?php echo $comID; ?></td>
-                    <td id="name<?php echo $comID; ?>"><?php echo $name; ?></td> 
-                    <td id="dateBus<?php echo $comID; ?>"><?php echo $dateBus; ?></td>
-                    <td id="type<?php echo $comID; ?>"><?php echo $busType; ?></td> 
-                    <td id="address<?php echo $comID; ?>"><?php echo $address; ?></td>
-                    
-                </tr>
-                <?php
-                endwhile;
-                ?>
-            </table>
-            </div>
-     <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
-          <div id="column2">
+  
+            <!-- FORM THAT ALLOWS USER TO EDIT COMPANY INFORMATION --> 
+          <div id="form-wrapper">
             <div id="form-A">
                 <form id="editForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
@@ -177,7 +149,47 @@ th:nth-child(2){
                     </fieldset>
                 </form>
             </div>
-          </div>
+          </div>    
+                
+          <div>
+             <button id="createCom" class="btn">Create New Company</button>
+          </div>      
+                
+            <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
+                
+                <?php 
+                $sql = "SELECT * FROM COMPANY;";
+                $result = $pdo->query($sql); 
+                
+                while($val=$result->fetch()):
+                   $comID = $val['CompanyID'];
+                    $name = $val['Name'];
+                    $dateBus = $val['DateFirstBusiness'];
+                    $busType = $val['BusinessType'];
+                    $address = $val['Address'];
+                    ?>
+                <tr>
+                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
+                        <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
+                        onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
+                        <a href="/JGWentworth/Controller/?viewID=<?php echo $comID; ?>" 
+                        onclick="return confirm('Are you sure you want to leave this page?');"><input type="submit" value="View Employees"></a>
+                    </td>
+                    <td id="compID<?php echo $comID; ?>"><?php echo $comID; ?></td>
+                    <td id="name<?php echo $comID; ?>"><?php echo $name; ?></td> 
+                    <td id="dateBus<?php echo $comID; ?>"><?php echo $dateBus; ?></td>
+                    <td id="type<?php echo $comID; ?>"><?php echo $busType; ?></td> 
+                    <td id="address<?php echo $comID; ?>"><?php echo $address; ?></td>
+                    
+                </tr>
+                <?php
+                endwhile;
+                ?>
+            </table>
+            </div>
          </div>     
        </div>
     </body>
