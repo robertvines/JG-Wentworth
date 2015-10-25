@@ -7,7 +7,6 @@
  include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
     <script type="text/javascript">
-
         $(document).ready(function () 
         {
             $('#newDate').datepicker({dateFormat: "yy-mm-dd"});
@@ -236,7 +235,7 @@
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select name='company' id="editCompCompany" name="editCompCompany">
+                                    <select id="editCompCompany" name="editCompCompany">
                                         <?php
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
