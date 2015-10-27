@@ -1,20 +1,27 @@
 <?php
-
+ if(isset($_POST['select']))
+ {
+     $val = $_POST['selector'];
+     showPage($val);            
+ }
+ else {
+     showPage('all');
+ }
 /* 
  * To create, edit, and delete companie employees and non-employees
  */
+ function showPage($val) {
+     $compVal = $val;
+ 
  include ('Header.php');
  include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
     <script type="text/javascript">
+
         $(document).ready(function () 
         {
-            $('#newDate').datepicker({dateFormat: "yy-mm-dd"});
-            
-            $('#Company').show();
-            $('#NoCompany').hide();
-            $('#div1').show();
-            $('#div2').hide();
+           
+            $('.datepicker').datepicker({dateFormat: "yy-mm-dd"});
             $('#create1').hide();
             $('#create2').hide();
             $('#edit1').hide();
@@ -103,18 +110,53 @@
                 document.getElementById('hiddenID').value = id;
             });
             
+            $('#hideCompEdit').click(function() {
+                $('#edit1').hide();
+            });
+            
+            $('#hideClientEdit').click(function(){
+               $('#edit2').hide(); 
+            });
+            
+            $('#hideCreateComp').click(function(){
+               $('#create1').hide(); 
+            });
+            
+             $('#hideCreateClient').click(function(){
+               $('#create2').hide(); 
+            });
+           
+            
+            
         });
     </script>
     <body>
+ <input type="text" id="getCompInfo" value="all"/>
         <div id="page">
             <div id="body">
                 <div>
-                   <input id="compClient" type="radio" name="name_radio1" value="value_radio1" />Company
-                   <input id="client" type="radio" name="name_radio1" value="value_radio2" />No Company
-                </div>
                 
-                <h1 id="Company">Company Client</h1>
-                <h1 id="NoCompany">Client</h1>
+                <label>View Clients By:</label>
+<!------------FORM THAT POSTS TO SAME PAGE, ALLOWS USER TO FILTER CLIENTS BY COMPANY ------------------------->       
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" name="myform" method="post" id="selectorID">            
+            <select id="filter" name="selector"> 
+                 <option value="all">All Companies</option>
+                 <option value="noComp">No Company</option>
+             <?php 
+                $sql1 = "SELECT CompanyID, Name FROM COMPANY ORDER BY Name;";
+                $result1 = $pdo->query($sql1); 
+                
+                while($val=$result1->fetch()):
+                   $comID = $val['CompanyID'];
+                    $name = $val['Name'];         
+                 ?> 
+                        <option id="option<?php echo $comID ?>" value="<?php echo $comID ?>"><?php echo $name ?></option>
+                  <?php endwhile; ?>
+                    </select>
+            <input type="submit" name="select" id="selectSubmit" value="Select">
+        </form>
+
+                </div>
                 
 <!-------------- Create Company Client --------------------------------------------------------------------------------------->
                 <div id="create1">
@@ -163,18 +205,18 @@
                                     <td>Email:</td>
                                     <td><input type="email" name="compEmail" required /></td>
                                     <td>First Contacted</td>
-                                    <td><input type="text" id="newDate" name="compFContacted" /></td>
+                                    <td><input type="text" class="datepicker" id="compFContacted" name="compFContacted" /></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="submit" name="createCompClient" value="Create Company Client" /></td>
-                                    <td colspan="3"><button name="cancelCreateComp">Cancel</buton></td>
+                                    <td><input type="submit" class="btnsmall" name="createCompClient" value="Create Company Client" /></td>
+                                    <td colspan="3"><button id='hideCreateComp' class="btnsmall" type="button">Cancel</button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </form>
                 </div>
                 
-<!-------------- Create Client --------------------------------------------------------------------------------------------->
+<!-------------- Create Non-Comp Client --------------------------------------------------------------------------------------------->
                 <div id="create2">  
                     <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table id="column2">
@@ -203,11 +245,11 @@
                                 <td>Address:</td>
                                 <td><input type="text" name="clientAddress" /></td>
                                 <td>First Contacted</td>
-                                <td><input type="text" id="newDate" name="clientFContacted" /></td>
+                                <td><input type="text" class="datepicker" id="clientFContacted" name="clientFContacted" /></td>
                             </tr>
                             <tr>
-                                <td><input type="submit" name="createClient" value="Create Client" /></td>
-                                <td colspan="3"><input type="submit" name="cancelCreateClient" value="Cancel" /></td>
+                                <td><input type="submit" class="btnsmall" name="createClient" value="Create Client" /></td>
+                                <td colspan="3"><button id='hideCreateClient' class="btnsmall" type="button">Cancel</button></td>
                             </tr>
                         </table>
                     </form>
@@ -235,7 +277,7 @@
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select id="editCompCompany" name="editCompCompany">
+                                    <select name='company' id="editCompCompany" name="editCompCompany">
                                         <?php
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
@@ -257,18 +299,18 @@
                                 <td>Email:</td>
                                 <td><input type="email" id='editCompEmail' name='editCompEmail' /></td>
                                 <td>First Contacted<br>yyyy-mm-dd:</td>
-                                <td><input type="text" id='editCompFContacted' name='editCompFContacted' /></td>
+                                <td><input type="text" class="datepicker" id='editCompFContacted' name='editCompFContacted' /></td>
                             </tr>
                             <tr>
                                 <td><input type="hidden" id="hiddenID" name="editCompID"></td>
-                                <td><input type="submit" name='editCompClient' value="Save" /></td>
-                                <td colspan="3"><input type="submit" name="cancelEditComp" value="Cancel" /></td>
+                                <td><input type="submit" class="btnsmall" name='editCompClient' value="Save" /></td>
+                                <td colspan="3"><button id='hideCompEdit' class="btnsmall" type="button">Cancel</button></td>
                             </tr>
                         </table>
                     </form>
                 </div>
                 
-<!-------------- Edit Client ----------------------------------------------------------------------------------------------->
+<!-------------- Edit Non-Comp Client ----------------------------------------------------------------------------------------------->
                 <div id="edit2">
                     <form method="post" action="/JGWentworth/Controller/ClientController.php" enctype="multipart/form-data">
                         <table>
@@ -297,81 +339,39 @@
                                 <td>Address:</td>
                                 <td><input type="text" id='editClientAddress' name='editClientAddress' /></td>
                                 <td>First Contacted<br>yyyy-mm-dd:</td>
-                                <td><input type="text" id='editClientFContacted' name='editClientFContacted' /></td>
+                                <td><input type="text" class="datepicker" id='editClientFContacted' name='editClientFContacted' /></td>
                             </tr>
                             <tr>
                                 <td><input type="hidden" id="hiddenID" name="editClientID"></td>
-                                <td><input type="submit" value="Save" name="editNoCompClient" /></td>
-                                <td colspan="3"><input type="submit" name="cancelEditClient" value="Cancel" /></td>
+                                <td><input type="submit" class="btnsmall" value="Save" name="editNoCompClient" /></td>
+                                <td colspan="3"><button id='hideClientEdit' class="btnsmall" type="button">Cancel</button></td>
                             </tr>
                         </table>
                     </form>
                 </div>
-                
-<!-------------- Show Company Client ---------------------------------------------------------------------------------------->
-                <div id="div1">
-                    <p><button id="createCompClient">Create Company Client</button></p>               
-                    <table>
-                        <tr>
-                            <th>Photo</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Title</th>
-                            <th>Company</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>First Contacted</th>
-                            <th></th>
-                            <th></th>
-                        <tbody>
-                        </tr>
-                        <?php
-                        
-                            $companyId = $val['CompanyID'];
-                            
-                            $sql = "SELECT COMPANY_MEMBER.*, COMPANY.Name FROM COMPANY_MEMBER "
-                                    . "JOIN COMPANY "
-                                    . "ON COMPANY.CompanyID = COMPANY_MEMBER.CompanyID";
 
-                            $result = $pdo->query($sql);
+                <?php
+                        switch($compVal){
+                            case 'all':
+                                $sql = "SELECT COMPANY_MEMBER.*, COMPANY.Name FROM COMPANY_MEMBER "
+                                . "JOIN COMPANY ON COMPANY.CompanyID = COMPANY_MEMBER.CompanyID";
+                                break;
+                            case 'noComp':
+                                $sql = "SELECT * FROM NON_MEMBER";
+                                break;
+                            default :
+                              $sql = 'SELECT COMPANY_MEMBER.*, COMPANY.Name FROM COMPANY_MEMBER '
+                                . 'JOIN COMPANY ON COMPANY.CompanyID = COMPANY_MEMBER.CompanyID '
+                                . ' WHERE COMPANY.CompanyID ='. $compVal .';';
 
-                            while($val=$result->fetch()):
-                            
-                                $compName = $val['Name'];
-                                $memberId = $val['MemberID'];
-                                $fName = $val['FirstName'];
-                                $lName = $val['LastName'];
-                                $title = $val['Title'];
-                                $phone = $val['Phone'];
-                                $email = $val['Email'];
-                                $fContacted = $val['DateFirstContact'];
-                                $photo = $val['PhotoURL'];  
-                                
-                                $trimm = str_replace( $_SERVER["DOCUMENT_ROOT"],"", $photo);
-                                
-                        ?>
-                        <tr>
-                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
-                                    height: 39px;" /></td>
-                            <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
-                            <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
-                            <td id="showCompTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
-                            <td id="showCompCompany<?php echo $memberId; ?>">
-                                <?php echo $compName; ?></td>
-                            <td id="showCompPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
-                            <td id="showCompEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
-                            <td id="showCompFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
-                            <td><button class="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
-                            <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
-                        </tr>     
-                        <?php endwhile; ?>
-                        </tbody>
-                    </table>
-                </div>
-                
+                        }// end switch
+                           $result = $pdo->query($sql);
+                        if($compVal == 'noComp'){
+                    ?>
 <!-------------- Show Client ----------------------------------------------------------------------------------------------->
                 <div id="div2">
-                    <p><button id="createClient">Create Client</button></p>
+                      <h1 id="NoCompany" class="title">CLIENT</h1>
+                      <p><button class="btn" id="createClient">Create Client</button></p>
                     <table>
                         <tr>
                             <th>Photo</th>
@@ -421,7 +421,70 @@
                         <?php endwhile; ?>
                     </table>
                 </div>
+                <?php
+                        }//end IF
+                        else {
+                ?>
+<!-------------- Show Company Client ---------------------------------------------------------------------------------------->
+                <div id="div1">
+                    <h1 id="Company" class="title">COMPANY CLIENT</h1>
+                    <p><button class="btn" id="createCompClient">Create Company Client</button></p>               
+                    <table>
+                        <tr>
+                            <th>Photo</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>First Contacted</th>
+                            <th></th>
+                            <th></th>
+                        <tbody>
+                        </tr>
+                        <?php
+
+                            while($val=$result->fetch()):
+                            
+                                $compName = $val['Name'];
+                                $memberId = $val['MemberID'];
+                                $fName = $val['FirstName'];
+                                $lName = $val['LastName'];
+                                $title = $val['Title'];
+                                $phone = $val['Phone'];
+                                $email = $val['Email'];
+                                $fContacted = $val['DateFirstContact'];
+                                $photo = $val['PhotoURL'];  
+                                
+                                $trimm = str_replace( $_SERVER["DOCUMENT_ROOT"],"", $photo);
+                                
+                        ?>
+                        <tr>
+                            <td><img src="<?php echo $trimm; ?>" alt="N/A" style="width: 29px;
+                                    height: 39px;" /></td>
+                            <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
+                            <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
+                            <td id="showCompTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
+                            <td id="showCompCompany<?php echo $memberId; ?>">
+                                <?php echo $compName; ?></td>
+                            <td id="showCompPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
+                            <td id="showCompEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
+                            <td id="showCompFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>
+                            <td><button class="editCompClient" id="<?php echo $memberId; ?>">Edit</button></td>
+                            <td><a href="/JGWentworth/Controller/ClientController.php?delete_compClient=<?php echo $memberId; ?>" onclick="return confirm('Are you sure you want to delete this client?');"><input type="submit" value="Delete"></a></td>
+                        </tr>     
+                        <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php
+                  }// end ELSE
+                ?>
+
             </div>
         </div>
     </body>
 </html>
+<?php 
+} // end function showPage

@@ -1,5 +1,4 @@
 <?php
-
 /* 
    Sample Database connection code and queries.
  */
@@ -33,6 +32,4 @@
         $sql = "INSERT INTO sql591897.LOGIN (LoginID, UserName, Password) VALUES (NULL, 'usr3333Example', 'pwdE3333xample');";
         $pdo->exec($sql);
     
-    */ 
-     
- 
+    */ ?>

@@ -1,5 +1,4 @@
-<?php
- 
+<?php 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -46,7 +45,7 @@ class companyClass {
     
     
     function createCompany()
-    {        echo 'made it inside createCompany';
+    {        
         try{
             $user = 'sql591897';
             $password = 'hA5!kQ4%';  
@@ -59,9 +58,9 @@ class companyClass {
                             . " VALUES (NULL, '".$this->getName()."', '".$this->getDate()."', '".$this->getType()."', '".$this->getAddress()."');";
        
                     if ($pdo->query($sql) == TRUE) {
-                        echo "Record inserted successfully";
+                        
                     } else {
-                        echo "An error occurred while inserting the record : " . $pdo->error;
+                     //   echo "An error occurred while inserting the record : " . $pdo->error;
                     }
                 } catch (Exception $ex) {
                    echo $ex->getMessage();
@@ -70,7 +69,7 @@ class companyClass {
     }// end function createCompany()
     
     static function deleteCompany($id){
-      try{  echo 'made it inside deletecompany';
+      try{  
         $user = 'sql591897';
         $password = 'hA5!kQ4%';  
         $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
@@ -82,9 +81,9 @@ class companyClass {
                     WHERE CompanyID = ". $id;
         
         if ($pdo->query($sql) == TRUE) {
-                        echo "Company deleted successfully";
+                        
                     } else {
-                        echo "An error occurred while deleting the record : " . $pdo->error;
+                      //  echo "An error occurred while deleting the record : " . $pdo->error;
                     }
                 } catch (Exception $ex) {
                     echo $ex->getMessage();
@@ -93,8 +92,8 @@ class companyClass {
     }// end function deleteCompany()
     
     function updateCompany()
-    {        echo 'made it inside updateCompany';
-     try{ echo'inside function'; 
+    {        
+     try{ 
          $user = 'sql591897';
          $password = 'hA5!kQ4%';  
          $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
@@ -105,13 +104,13 @@ class companyClass {
          $sql = "UPDATE sql591897.COMPANY SET Name='".$this->getName()."', DateFirstBusiness='".$this->getDate()."', BusinessType='".$this->getType()."', Address='".$this->getAddress()."' WHERE CompanyID=".$this->getID().";";        
 
             if ($pdo->query($sql) == TRUE) {
-                echo "Record updated successfully";
+                
             } else {
-                echo "An error occurred while updating the record: " . $pdo->error;
+              //  echo "An error occurred while updating the record: " . $pdo->error;
             }
                                      
         } catch (Exception $ex) {
-           echo $ex->getMessage();
+          // echo $ex->getMessage();
      }//end try catch
     }// end function updateCompany()
     
@@ -119,4 +118,4 @@ class companyClass {
         $data = trim($data);
         return $data;
     }// end function 
-}//end companyClass
+}//end companyClass ?>

@@ -19,6 +19,7 @@ Initial page to view companies
               $( '#form-B' ).hide();
          }
          $('#hiddenID').hide();
+         $('.hideInput').hide();
  
      });
      /* *************************************************************************
@@ -44,7 +45,7 @@ Initial page to view companies
          $('#editDate').datepicker({dateFormat: "yy-mm-dd"});
      //    document.getElementById('createName').focus();
          
-         //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
+      //POPULATE FIELDS WITH EXISTING COMPANY INFORMATION USING ID
             var id = $(this).get(0).id;
     
             document.getElementById('editID').innerHTML = id;
@@ -92,6 +93,10 @@ Initial page to view companies
     padding-bottom: 10px;
 }
 
+.clientForm {
+    display: inline;
+}
+
 th, td {
   white-space: nowrap;
 }
@@ -125,15 +130,15 @@ legend {
                             <tr><td>ID:</td> <td id="editID"></td></tr>
                             <tr><td>Name:</td> <td><input type="text" id="editName" name="editName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" id="editType" name="editType"></td></tr>
-                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
+                            <tr><td>Date of First Business:</td> <td><input type="text" id="editDate" name="editDate"></td></tr>
                             <tr><td>Address</td> <td><input type="text" id="editAddress" name="editAddress"></td></tr>
                         </table>
                         <input type="text" id="hiddenID" name="editID">
-                        <input type="submit" name="edit-submit" class="btnsmall" value="Submit"> <button id='hideEdit' class="btnsmall" type="button">Cancel</button>
+                        <input type="submit" name="edit-submit" class="btnsmall" value="Save"> <button id='hideEdit' class="btnsmall" type="button">Cancel</button>
                     </fieldset>
                 </form>
             </div>
-      <!-- FORM THAT ALLOWS A USER TO CREATE A NEW COMPANY -->      
+<!----------- FORM THAT ALLOWS A USER TO CREATE A NEW COMPANY --------------------------------->      
             <div id="form-B">
                 <form id="createForm" method="post" action="/JGWentworth/Controller/companyController.php">
                     <fieldset>
@@ -142,7 +147,7 @@ legend {
                         <table style="margin-bottom: 5px;">
                             <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
-                            <tr><td>Date of First Business (yyyy-mm-dd):</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
+                            <tr><td>Date of First Business:</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
                             <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
                         <input type="submit" name="create-submit" value="Submit" class="btnsmall"> <button id='hideCreate' class="btnsmall" type="button">Cancel</button>
@@ -157,7 +162,6 @@ legend {
                 
             <div class="table-wrapper">
             <table>
-                <tr>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
                 
                 <?php 
@@ -175,8 +179,12 @@ legend {
                     <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
                         <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
                         onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
-                        <a href="/JGWentworth/Controller/?viewID=<?php echo $comID; ?>" 
-                        onclick="return confirm('Are you sure you want to leave this page?');"><input type="submit" value="View Employees"></a>
+                        
+                        <form action="/JGWentworth/View/Client.php" method="post" class="clientForm">
+                            <input class="hideInput" type="text" name="selector" value="<?php echo $comID;?>">
+                            <input onclick="return confirm('Are you sure you want to leave this page?');" 
+                            type="submit" name="select"  value="View Clients"> 
+                        </form>
                     </td>
                     <td id="compID<?php echo $comID; ?>"><?php echo $comID; ?></td>
                     <td id="name<?php echo $comID; ?>"><?php echo $name; ?></td> 

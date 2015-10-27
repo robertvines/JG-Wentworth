@@ -67,7 +67,7 @@
         $title2 = $_POST['clientTitle'];
         $email2 = $_POST['clientEmail'];
         $phone2 = $_POST['clientPhone'];
-        $address = $_POST['clientAddress'];
+        $address2 = $_POST['clientAddress'];
         $fContacted2 = $_POST['clientFContacted'];
             
         $sql = "INSERT INTO `NON_MEMBER` (`FirstName`, `LastName`, `Title`, `Email`, `Phone`, `Address`, `DateFirstContact`, `PhotoURL`) "
