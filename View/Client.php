@@ -15,6 +15,7 @@
  
  include ('Header.php');
  include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
+
 ?>
     <script type="text/javascript">
 
@@ -26,6 +27,7 @@
             $('#create2').hide();
             $('#edit1').hide();
             $('#edit2').hide();
+            $('.phone').mask('000-000-0000');
 
             $('#compClient').click(function () 
             {
@@ -58,6 +60,7 @@
                 $('#create2').hide();
                 $('#edit1').hide();
                 $('#edit2').hide();
+                
             });
             
             $('#createClient').click(function ()
@@ -199,7 +202,7 @@
                                         </select>
                                     </td>
                                     <td>Phone:</td>
-                                    <td><input type="text" name="compPhone" /></td>
+                                    <td><input type="text" class="phone" name="compPhone" /></td>
                                 </tr>
                                 <tr>
                                     <td>Email:</td>
@@ -237,7 +240,7 @@
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" name="clientPhone" /></td>
+                                <td><input type="text" class="phone" name="clientPhone" /></td>
                                 <td>Email:</td>
                                 <td><input type="email" name="clientEmail" /></td>
                             </tr>
@@ -293,7 +296,7 @@
                                     </select>
                                 </td>
                                 <td>Phone:</td>
-                                <td><input type="text" id='editCompPhone' name='editCompPhone' /></td>
+                                <td><input type="text" class="phone" id='editCompPhone' name='editCompPhone' /></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
@@ -331,7 +334,7 @@
                             </tr>
                             <tr>
                                 <td>Phone:</td>
-                                <td><input type="text" id='editClientPhone' name='editClientPhone' /></td>
+                                <td><input type="text" class="phone" id='editClientPhone' name='editClientPhone' /></td>
                                 <td>Email:</td>
                                 <td><input type="email" id='editClientEmail' name='editClientEmail' /></td>
                             </tr>

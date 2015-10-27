@@ -118,4 +118,4 @@ class companyClass {
         $data = trim($data);
         return $data;
     }// end function 
-}//end companyClass ?>
+}//end companyClass?>

@@ -71,7 +71,7 @@ Initial page to view companies
             $('#form-A').hide();  
          });
          
-    });// end documet.ready function   
+    });// end document.ready function   
 </script>
 
 <style>
@@ -177,7 +177,7 @@ legend {
                     ?>
                 <tr>
                     <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
-                        <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo $comID; ?>" 
+                        <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo urlencode($comID) ; ?>" 
                         onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
                         
                         <form action="/JGWentworth/View/Client.php" method="post" class="clientForm">
