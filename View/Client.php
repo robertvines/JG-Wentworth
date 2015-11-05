@@ -133,13 +133,13 @@
             
         });
     </script>
-    <body>
- <input type="text" id="getCompInfo" value="all"/>
+<body>
+    <input type="text" id="getCompInfo" value="all"/>
         <div id="page">
             <div id="body">
                 <div>
-                
-                <label>View Clients By:</label>
+                    <label>View Clients By:</label>
+                    
 <!------------FORM THAT POSTS TO SAME PAGE, ALLOWS USER TO FILTER CLIENTS BY COMPANY ------------------------->       
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" name="myform" method="post" id="selectorID">            
             <select id="filter" name="selector"> 
@@ -158,7 +158,6 @@
                     </select>
             <input type="submit" name="select" id="selectSubmit" value="Select">
         </form>
-
                 </div>
                 
 <!-------------- Create Company Client --------------------------------------------------------------------------------------->
@@ -491,3 +490,4 @@
 </html>
 <?php 
 } // end function showPage
+?>
