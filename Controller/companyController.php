@@ -5,7 +5,6 @@
  * Handles multiple forms that will be submitted from Company.php
  */
 require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/companyClass.php');
-
             if (isset($_POST['edit-submit'])) {
                     
                     // retrieve posted data
@@ -19,10 +18,10 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/companyClass.php');
                     $com = new companyClass($name, $dateBusiness, $compAdd, $type, $id);
                     $com->updateCompany();
                     
-                   // header("Location:/JGWentworth/View/Company.php");
-                  //  exit;
+                 //   header("Location:/JGWentworth/View/Company.php");
+                 //   exit;
+                 ?><!-- <meta http-equiv="Location" content="/JGWentworth/View/Company.php"><?php
             }// end first if
-
             if (isset($_POST['create-submit'])) {
    
                     $newName = $_POST['newCompName'];
@@ -33,14 +32,13 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/companyClass.php');
                     $newCom = new companyClass($newName, $newDate, $newAddress, $newType);
                     $newCom->createCompany();
                     
-                //    header("Location: /JGWentworth/View/Company.php");
+                   header("Location:/JGWentworth/View/Company.php");
+                   exit;
             }// end second if
-            
-            
             if (isset($_GET['deleteCompany'])) {
                 $deleteID = $_GET['deleteCompany'];
                 companyClass::deleteCompany($deleteID);
                 
-                
-            }
-            header("Location:/JGWentworth/View/Company.php"); exit;?>
+                 header("Location:/JGWentworth/View/Company.php");
+                 exit;
+            }?>

@@ -148,7 +148,7 @@ legend {
                             <tr><td>Name:</td> <td><input type="text" id="createName" name="newCompName"></td></tr>
                             <tr><td>Type of Business:</td> <td><input type="text" name='newBusiness'></td></tr>
                             <tr><td>Date of First Business:</td> <td><input type="text" id="newDate" name='newDateOfBusiness'></td></tr>
-                            <tr><td>Address</td> <td><input type="text" name='newAddress'></td></tr>
+                            <tr><td>Address:</td> <td><input type="text" name='newAddress'></td></tr>
                         </table>
                         <input type="submit" name="create-submit" value="Submit" class="btnsmall"> <button id='hideCreate' class="btnsmall" type="button">Cancel</button>
                     </fieldset>
