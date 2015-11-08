@@ -33,6 +33,7 @@ Initial page to view companies
          }
          
        $('#newDate').datepicker({dateFormat: "yy-mm-dd"});
+       
         });
  
         $('.editCom').click(function(){ 
