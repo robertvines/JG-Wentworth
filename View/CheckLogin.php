@@ -44,32 +44,30 @@
 
         $val=$row->fetch();
         $userID = $val['UserID'];
-         $fName = $val['FirstName'];
-         $lName = $val['LastName'];
-         $role = $val['Role'];
-        //$deptName = $val['DeptName'];
+        $fName = $val['FirstName'];
+        $lName = $val['LastName'];
+        $role = $val['Role'];
+        $deptName = $val['Department'];
 //        $userName = $val['UserName'];
 //        $password = $val['Password'];
             
             $_SESSION[fName]=$fName;
             $_SESSION[lName]=$lName;
             $_SESSION[role]=$role;
-            //$_SESSION[deptName]=$deptName;
+            $_SESSION[dept]=$deptName;
             $_SESSION[userName]=$myusername;
             $_SESSION[password]=$mypassword;
 
-            echo $_SESSION['role'];
+            echo $_SESSION['Role'];
     //Depending on type of user we will redirect to various pages		
             if($role == 'Admin')	 
-                { header( "location:Company.php"); 	}
-//            else if($role == 'Department Chair')	 
-//                { header( "location:ChairSecHome.php"); }
-//            else if($role == 'Secretary')	 
-//                { header( "location:ChairSecHome.php"); }
-//            else if($role == 'Dean')	 
-//                { header( "location:DeanHome.php"); 	}
-//            else    
-//                { header( "location:Login.php");      }
+                { header( "location:Home.php");  }
+            else if($role == 'Employee')	 
+                { header( "location:Home.php");  }
+            else if($role == 'Supervisor')	 
+                { header( "location:Home.php");  }
+            else    
+                { header( "location:Login.php"); }
     }
     else
     {
