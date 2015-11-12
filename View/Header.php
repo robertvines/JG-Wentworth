@@ -15,10 +15,10 @@ session_start();
             include('AdminHeader.php');
             break;
         case 'Employee':
-            include('ChairSecHeader.php');
+            include('EmployeeHeader.php');
             break;
         case 'Supervisor':
-            include('ChairSecHeader.php');
+            include('SupervisorHeader.php');
             break;
         default :
             header('location:Login.php');
