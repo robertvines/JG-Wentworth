@@ -6,17 +6,8 @@
  * @author Robert Vines
  */
 
-?>
-
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="AlumniTracker.css" type="text/css"/>
-    </head>
-    <body>
-        <?php include('PlainHeader.php'); ?>
+ include('PlainHeader.php'); 
+ ?>
         <div id="page">
             <div id="loginBox">
                 <form method="post" action="CheckLogin.php">
@@ -33,6 +24,7 @@
                     </table>
                     <p id="loginText"><input type="submit" value="Sign In"></p>    
                 </form>
+                <a href="ForgotLogin.php"><button style="float:right;" >Forgot Login?</button></a>
             </div>
         </div>
     </body>
