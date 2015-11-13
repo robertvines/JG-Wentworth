@@ -7,17 +7,16 @@ if(isset($_POST['compReport']))
      showReport($val, $val2);            
  }
  else {
-     showReport('all', 'no dates');
+     showReport('all', NULL);
  }
 /* 
  * To run and show CONTACT reports based off each company
  */
-
- 
  function showReport($val, $val2) {
      $compVal = $val;
      $dates = $val2;
-     
+     $from = substr($dates, 10, 10);
+     $to = substr($dates, 29, 10);
      
  include ('Header.php');
  include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
@@ -37,13 +36,26 @@ if(isset($_POST['compReport']))
 }
     $('.ShowMe').click(function() {
 	var id = $(this).get(0).id;
-        var x = document.getElementById("comp"+id).className;
+        
+        if(id === "noCompID"){
+            var x = document.getElementById("nonComp").className;
+            
+            if(x === "hiderow") {
+                 document.getElementById("nonComp").className = "showrow";
+            }
+            else {
+                document.getElementById("nonComp").className = "hiderow";
+            }
+        }// end if
+        else{
+            var x = document.getElementById("comp"+id).className;
        
-        if(x === "hiderow") {
-             document.getElementById("comp"+id).className = "showrow";
-        }
-	else {
-             document.getElementById("comp"+id).className = "hiderow";
+            if(x === "hiderow") {
+                document.getElementById("comp"+id).className = "showrow";
+            }
+            else {
+                document.getElementById("comp"+id).className = "hiderow";
+            }
         }
 	toggleTableRow();
         setRowColours();
@@ -73,12 +85,41 @@ if(isset($_POST['compReport']))
    font-weight: bold;
 }
 
+.local-table {
+    white-space: nowrap;
+}
+
 
 </style>
     <body>
     <div id="page">
       <div id="body">
-        <label class="title">REPORT by Company</label>
+          <?php
+        /******************************************************************************************
+         ********** FILTER TITLE CRITERIA ********************************************************/
+          $title = "";
+          switch($compVal){
+                case 'all':
+                    $title = "All Companies";
+                    break;
+                case 'noComp':
+                    // does not return anything for COMPANY, continues to showContactNonMem();
+                    $title = "All Clients w/o a Company";
+                    break;
+                 default:
+                     $sqlTitle = "SELECT Name FROM COMPANY WHERE CompanyID = ".$compVal.";";
+                     $resultTitle = $pdo->query($sqlTitle); 
+                     $val5=$resultTitle->fetch();
+                     $title = $val5['Name'];
+          }// end switch
+          
+          $dateTitle = "";
+          if($dates != NULL){
+            $dateTitle = "From ".$from." To ".$to;            
+          }
+                    
+          ?>
+        <label class="title">REPORT for <?php echo $title." ".$dateTitle ?></label>
  <!------------------FORM THAT POSTS TO SAME PAGE, ALLOWS USER TO FILTER CLIENTS BY COMPANY ------------------------->       
         <div id="formDiv">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" name="myform" method="post">            
@@ -102,18 +143,56 @@ if(isset($_POST['compReport']))
         </div>
  <!-------------------- BEGIN OF TABLE WITH CONTACT FORM --------------------------------------------------------> 
         <div id="reportDiv" class="table-wrapper">
-        <table>
+            <table class="local-table">
             <th>Action</th><th>Company</th><th>Employee</th><th>Client</th><th>Subject</th><th>Duration</th><th>Date/Time</th><th>Result</th>  
              <tr>
-                <?php
+                <?php echo $dates;
+ echo '<br>'.$from;
+ echo '<br>'.$to;
+         /******************************************************************************************
+         ********** FILTER CONTACT CRITERIA *******************************************************/
+         
+            switch($compVal){
+                case 'all':
+                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY ORDER BY Name;";
+                    break;
+                case 'noComp':
+                    // does not return anything for COMPANY, continues to showContactNonMem();
+                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = -1;";
+                    break;
+                 default:
+                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = ".$compVal.";";
+            }// end switch 
+         
+//            switch($compVal){
+//                case 'all':
+//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE DateTime BETWEEN '".$from." 00:00:00' AND '".$to." 23:59:00' ORDER BY Name;";
+//                    break;
+//                case 'noComp':
+//                    // does not return anything for COMPANY, continues to showContactNonMem();
+//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = -1;";
+//                    break;
+//                 default:
+//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = ".$compVal.";";
+//
+//             }// end switch     
+               
         /******************************************************************************************
          ********** GET ALL COMPANIES ************************************************************/
-                $sql1 = "SELECT CompanyID, Name FROM COMPANY ORDER BY Name;";
-                $result1 = $pdo->query($sql1);
-                while($compaval=$result1->fetch()):
+                $sql4 = $sqlCriteria;
+                $result4 = $pdo->query($sql4);
+                
+                while($compaval=$result4->fetch()):
                    $compaID = $compaval['CompanyID'];
                    $compaName = $compaval['Name'];
                    
+                   //variables for TOTALs
+                   $numCalls = 0;
+                   $totalTime = 0;
+                   $numEmp = 0;
+                   $allEmp = array();
+                   $numClient = 0;
+                   $allClient = array();
                 ?>
                  <td><button class="ShowMe" id="<?php echo $compaID ?>">Show Totals</button></td>
                  <td colspan="7" class="main-table-row"><?php echo strtoupper($compaName); ?></td>
@@ -123,13 +202,19 @@ if(isset($_POST['compReport']))
                     $sql = "SELECT MemberID, FirstName, LastName FROM COMPANY_MEMBER WHERE CompanyID = ".$compaID.";";
                     $result = $pdo->query($sql); 
                 
-                  while($val=$result->fetch()):
-                    $memberID = $val['MemberID'];
-                    $memberName = $val['FirstName'] ." ". $val['LastName']; 
-                      
-                    $sql2 = "SELECT * FROM CONTACT WHERE MemberID = ".$memberID.";";
+                  while($val4=$result->fetch()):
+                    $memberID = $val4['MemberID'];
+                    $memberName = $val4['FirstName'] ." ". $val4['LastName']; 
+                    
+                    if($dates == NULL){
+                        $sql2 = "SELECT * FROM CONTACT WHERE MemberID = ".$memberID.";";
+                    }
+                    else{
+                        $sql2 = "SELECT * FROM CONTACT WHERE MemberID = ".$memberID." AND (DateTime BETWEEN '".$from." 00:00:00' AND '".$to." 23:59:00');";
+                    }
                     $result2 = $pdo->query($sql2);
-                  while($value2=$result2->fetch()){
+                    
+                  while($value2=$result2->fetch()):
                     $userID = $value2['UserID'];
                     $subject = $value2['Subject'];
                     $duration = $value2['Duration'];
@@ -140,7 +225,19 @@ if(isset($_POST['compReport']))
                     $result3 = $pdo->query($sql3);
                     $value3 = $result3->fetch();
                     $empName = $value3['FirstName'] ." ". $value3['LastName'];
-                  }//end inner2 while                  
+                    
+                    // Continue to Calculate TOTALs
+                    $numCalls ++;
+                    $totalTime = $totalTime + $duration;   
+                    
+                    if(!in_array($memberID, $allClient)){
+                        array_push($allClient, $memberID);
+                        $numClient ++;
+                    }
+                    if(!in_array($userID, $allEmp)){
+                        array_push($allEmp, $userID);
+                        $numEmp++;
+                    }
                     ?>
                 <tr>
                     <td></td>
@@ -148,27 +245,30 @@ if(isset($_POST['compReport']))
                     <td id="compID<?php echo ''; ?>"><?php echo $empName; ?></td>
                     <td id="name<?php echo ''; ?>"><?php echo $memberName; ?></td> 
                     <td id="dateBus<?php echo ''; ?>"><?php echo $subject; ?></td>
-                    <td id="dateBus<?php echo ''; ?>"><?php echo $duration; ?></td>
+                    <td id="dateBus<?php echo ''; ?>"><?php echo $duration; ?> minutes</td>
                     <td id="type<?php echo ''; ?>"><?php echo $datetime; ?></td> 
                     <td id="address<?php echo ''; ?>"><?php echo $res; ?></td>
                 </tr>
                 <?php
+                   endwhile;//end inner2 while
                 endwhile; //end inner while
                 ?> 
-                <tr id="comp<?php echo $compaID ?>" class="hiderow">
+                <tr id="comp<?php echo $compaID ?>" class="hiderow" style="color: red;">
                     <td></td>
                     <td class="main-table-row">Totals</td>
-                    <td class="main-table-row"># of Calls:<?php echo ' 30'; ?></td>
-                    <td colspan="2" class="main-table-row">Total Call Time:<?php echo ' 8 minutes'; ?></td>
-                    <td class="main-table-row"># Clients collab:<?php echo ' 34'; ?></td>
-                    <td class="main-table-row"># Employees collab:<?php echo ' 21'; ?></td>
+                    <td class="main-table-row"># Employees collab:<?php echo ' '.$numEmp; ?></td>
+                    <td class="main-table-row"># Clients collab:<?php echo ' '.$numClient ?></td>
+                    <td class="main-table-row"># of Calls:<?php echo ' '.$numCalls; ?></td>
+                    <td colspan="2" class="main-table-row">Total Call Time:<?php echo ' '.$totalTime.' minutes'; ?></td>
                     <td></td>
                    
               </tr>
              <?php
             endwhile; // end outer while
                 
-            showContactNonMem();
+            if($compVal == "noComp" || $compVal == "all"){
+                showContactNonMem($dates, $from, $to);
+            }
                 ?>
             </table>
         </div>
@@ -178,13 +278,11 @@ if(isset($_POST['compReport']))
 </html>
 <?php 
 
-
-
 }//end function showReport
 
 /******************************************************************************************
- ********** GET ALL CONTACT FROM NON_MEMBER **********************************************/
- function showContactNonMem(){
+ ********** GET ALL CONTACT info FROM NON_MEMBER **********************************************/
+ function showContactNonMem($dates, $from, $to){
           include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
        ?>
        <tr>
@@ -192,7 +290,14 @@ if(isset($_POST['compReport']))
        <td colspan="7" class="main-table-row"><?php echo strtoupper('Clients with no company'); ?></td>
        </tr>
        <?php
-        
+       //variables for TOTALs
+        $numCalls = 0;
+        $totalTime = 0;
+        $numEmp = 0;
+        $allEmp = array();
+        $numClient = 0;
+        $allClient = array(); 
+       
       $sql = "SELECT MemberID, FirstName, LastName FROM NON_MEMBER;";
                     $result = $pdo->query($sql); 
                 
@@ -200,9 +305,15 @@ if(isset($_POST['compReport']))
                     $memberID = $val['MemberID'];
                     $memberName = $val['FirstName'] ." ". $val['LastName']; 
                       
-                    $sql2 = "SELECT * FROM CONTACT_NON_MEMBER WHERE MemberID = ".$memberID.";";
+                    if($dates == NULL){
+                        $sql2 = "SELECT * FROM CONTACT_NON_MEMBER WHERE MemberID = ".$memberID.";";
+                    }
+                    else{
+                        $sql2 = "SELECT * FROM CONTACT_NON_MEMBER WHERE MemberID = ".$memberID." AND (DateTime BETWEEN '".$from." 00:00:00' AND '".$to." 23:59:00');";
+                    }
                     $result2 = $pdo->query($sql2);
-                  while($value2=$result2->fetch()){
+                    
+                  while($value2=$result2->fetch()):
                     $userID = $value2['UserID'];
                     $subject = $value2['Subject'];
                     $duration = $value2['Duration'];
@@ -212,8 +323,20 @@ if(isset($_POST['compReport']))
                     $sql3 = "SELECT FirstName, LastName FROM USER WHERE UserID = ".$userID.";";
                     $result3 = $pdo->query($sql3);
                     $value3 = $result3->fetch();
-                    $empName = $value3['FirstName'] ." ". $value3['LastName'];
-                  }//end inner2 while
+                    $empName = $value3['FirstName'] ." ". $value3['LastName']; 
+                    
+                    // Continue to Calculate TOTALs
+                    $numCalls ++;
+                    $totalTime = $totalTime + $duration;   
+                    
+                    if(!in_array($memberID, $allClient)){
+                        array_push($allClient, $memberID);
+                        $numClient ++;
+                    }
+                    if(!in_array($userID, $allEmp)){
+                        array_push($allEmp, $userID);
+                        $numEmp ++;
+                    }
                         ?>
                 <tr>
                     <td></td>
@@ -221,20 +344,22 @@ if(isset($_POST['compReport']))
                     <td id="compID<?php echo $comID; ?>"><?php echo $empName; ?></td>
                     <td id="name<?php echo $comID; ?>"><?php echo $memberName; ?></td> 
                     <td id="dateBus<?php echo $comID; ?>"><?php echo $subject; ?></td>
-                    <td id="dateBus<?php echo $comID; ?>"><?php echo $duration; ?></td>
+                    <td id="dateBus<?php echo $comID; ?>"><?php echo $duration; ?> minutes</td>
                     <td id="type<?php echo $comID; ?>"><?php echo $datetime; ?></td> 
                     <td id="address<?php echo $comID; ?>"><?php echo $res; ?></td>
                 </tr>
-                <tr id="noCompID" class="hiderow">
+                <?php
+                endwhile;//end inner2 while
+            endwhile; // end outer while
+            ?>
+                <tr id="nonComp" class="hiderow" style="color: red;">
                     <td></td>
                     <td class="main-table-row">Totals</td>
-                    <td class="main-table-row"># of Calls:<?php echo ''; ?></td>
-                    <td class="main-table-row">Total Call Time:<?php echo ''; ?></td>
-                    <td class="main-table-row"># of Clients Contacted:<?php echo ''; ?></td>
-                    <td class="main-table-row"># of Employees Contacted<?php echo ''; ?></td>
-                    <td></td>
+                    <td class="main-table-row"># Employees collab:<?php echo ' '.$numEmp; ?></td>
+                    <td class="main-table-row"># Clients collab:<?php echo ' '.$numClient; ?></td>
+                    <td class="main-table-row"># of Calls:<?php echo ' '.$numCalls; ?></td>
+                    <td colspan="2" class="main-table-row">Total Call Time:<?php echo ' '.$totalTime.' minutes'; ?></td>        
                     <td></td>
               </tr>
-                <?php
-            endwhile; // end outer while
+            <?php
   }// end function showContactNonMem
