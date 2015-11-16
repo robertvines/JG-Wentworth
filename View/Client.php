@@ -13,6 +13,10 @@
  function showPage($val) {
      $compVal = $val;
  
+     $title = "COMPANY CLIENT";
+     if($compVal == "noComp"){
+        $title = "CLIENT"; 
+     }
  include ('Header.php');
  include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 
@@ -137,6 +141,7 @@
     <input type="text" id="getCompInfo" value="all"/>
         <div id="page">
             <div id="body">
+                <h1 class="title"><?php echo $title ?></h1>
                 <div>
                     <label>View Clients By:</label>
                     
@@ -372,7 +377,6 @@
                     ?>
 <!-------------- Show Client ----------------------------------------------------------------------------------------------->
                 <div id="div2">
-                      <h1 id="NoCompany" class="title">CLIENT</h1>
                       <p><button class="btn" id="createClient">Create Client</button></p>
                     <table>
                         <tr>
@@ -429,7 +433,6 @@
                 ?>
 <!-------------- Show Company Client ---------------------------------------------------------------------------------------->
                 <div id="div1">
-                    <h1 id="Company" class="title">COMPANY CLIENT</h1>
                     <p><button class="btn" id="createCompClient">Create Company Client</button></p>               
                     <table>
                         <tr>
