@@ -146,9 +146,7 @@ if(isset($_POST['compReport']))
             <table class="local-table">
             <th>Action</th><th>Company</th><th>Employee</th><th>Client</th><th>Subject</th><th>Duration</th><th>Date/Time</th><th>Result</th>  
              <tr>
-                <?php echo $dates;
- echo '<br>'.$from;
- echo '<br>'.$to;
+    <?php 
          /******************************************************************************************
          ********** FILTER CONTACT CRITERIA *******************************************************/
          
@@ -162,20 +160,7 @@ if(isset($_POST['compReport']))
                     break;
                  default:
                     $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = ".$compVal.";";
-            }// end switch 
-         
-//            switch($compVal){
-//                case 'all':
-//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE DateTime BETWEEN '".$from." 00:00:00' AND '".$to." 23:59:00' ORDER BY Name;";
-//                    break;
-//                case 'noComp':
-//                    // does not return anything for COMPANY, continues to showContactNonMem();
-//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = -1;";
-//                    break;
-//                 default:
-//                    $sqlCriteria = "SELECT CompanyID, Name FROM COMPANY WHERE CompanyID = ".$compVal.";";
-//
-//             }// end switch     
+            }// end switch
                
         /******************************************************************************************
          ********** GET ALL COMPANIES ************************************************************/
