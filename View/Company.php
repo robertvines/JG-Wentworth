@@ -175,10 +175,12 @@ legend {
                     $dateBus = $val['DateFirstBusiness'];
                     $busType = $val['BusinessType'];
                     $address = $val['Address'];
+                    
+                    $url = $comID;
                     ?>
                 <tr>
                     <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
-                        <a href="/JGWentworth/Controller/companyController.php?deleteCompany=<?php echo urlencode($comID) ; ?>" 
+                        <a href="/JGWentworth/Controller/companyController.php?delete=<?php echo urlencode(base64_encode($url));?>" 
                         onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
                         
                         <form action="/JGWentworth/View/Client.php" method="post" class="clientForm">

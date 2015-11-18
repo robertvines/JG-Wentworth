@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<script>
+
+function redirect(){ 
+    window.location.replace("/JGWentworth/View/Company.php");
+}//end redirect
+
+</script>
 <?php
 /* 
  * @author John Cochran
@@ -18,9 +25,9 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/companyClass.php');
                     $com = new companyClass($name, $dateBusiness, $compAdd, $type, $id);
                     $com->updateCompany();
                     
-                 //   header("Location:/JGWentworth/View/Company.php");
-                 //   exit;
-                 ?><!-- <meta http-equiv="Location" content="/JGWentworth/View/Company.php"><?php
+                 echo '<script type="text/javascript">'
+                    , 'redirect();'
+                    , '</script>';   
             }// end first if
             if (isset($_POST['create-submit'])) {
    
@@ -32,13 +39,16 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/companyClass.php');
                     $newCom = new companyClass($newName, $newDate, $newAddress, $newType);
                     $newCom->createCompany();
                     
-                   header("Location:/JGWentworth/View/Company.php");
-                   exit;
+                 echo '<script type="text/javascript">'
+                    , 'redirect();'
+                    , '</script>';   
             }// end second if
-            if (isset($_GET['deleteCompany'])) {
-                $deleteID = $_GET['deleteCompany'];
+            if (isset($_GET['delete'])) {
+
+                $deleteID = urldecode(base64_decode($_GET['delete']));
                 companyClass::deleteCompany($deleteID);
                 
-                 header("Location:/JGWentworth/View/Company.php");
-                 exit;
+                echo '<script type="text/javascript">'
+                    , 'redirect();'
+                    , '</script>';           
             }?>
