@@ -38,7 +38,7 @@
                 document.getElementById('editEmail').value = document.getElementById('email'+id).innerHTML;
                 document.getElementById('editUserName').value = document.getElementById('un'+id).innerHTML;
                 document.getElementById('editPass').value = document.getElementById('pass'+id).innerHTML;
-                document.getElementById('hiddenID').value = id;
+                document.getElementById('hiddenEdit').value = id;
             });
             
             $('#cancelEdit').click(function(){
@@ -189,7 +189,11 @@ th, td {
                             </tr>
                             <tr>
                                 <td>Role:</td>
-                                <td><input type="text" id='editRole' name="role" /></td>
+                                    <td><select name="Role" id='editRole'>
+                                        <option value="Admin">Administrator</option>
+                                        <option value="Supervisor">Supervisor</option>
+                                        <option value="Employee">Employee</option>
+                                        </select></td>
                             </tr>
                             <tr>
                                 <td>Department:</td>
@@ -204,7 +208,7 @@ th, td {
                                 <td><input type="email" id="editEmail" name="email" /></td>
                             </tr>
                         </table>
-                            <input type="submit" value="Save" id="editUser" class="btnsmall" />
+                            <input type="submit" value="Save" name="EditUser" id="editUser" class="btnsmall" />
                             <button type="button" id="cancelEdit" class="btnsmall">Cancel</button>
                       </div>
                       <div style="float: right">
@@ -222,7 +226,7 @@ th, td {
                           <button type="button" id="hideEditPass">hide text</button>
                       </div>
                         </fieldset>
-                        <input type="text" class="hiddenClass" name="editID">
+                        <input type="text" id="hiddenEdit" class="hiddenClass" name="editID">
                     </form>
                 </div>
             </div>    
@@ -263,7 +267,7 @@ th, td {
                                  $un = $val1['UserName'];
                                  $pass = $val1['Password'];
                                 
-                                $url = "/JGWentworth/Controller/userController.php?deleteUser=".$userID;
+                                $url = $userID;
                         ?>
                     
                     <label class="hiddenClass" id="un<?php echo $userID; ?>"><?php echo $un; ?></label>
@@ -272,7 +276,7 @@ th, td {
                         <tr>
                             <td>
                                 <button class="showEditUser" id=<?php echo $userID; ?> >Edit</button>
-                                <a href="<?php echo urlencode($url); ?>"
+                                <a href="/JGWentworth/Controller/userController.php?delete=<?php echo urlencode(base64_encode($url)); ?>"
                                    onclick="return confirm('Are you sure you want to delete this user?');"><input type="submit" value="Delete"></a>
                             </td>
                             <td id="userID<?php echo $userID; ?>"><?php echo $un; ?></td>

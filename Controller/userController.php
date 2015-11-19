@@ -21,10 +21,34 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/userClass.php');
         $newUser = new userClass($newfName, $newlName, $newRole, $newPhone,
                  $newEmail, $newDepartment, $newUserName, $newPassword);                        
         $newUser->createUser();
-                    
-//        echo '<script type="text/javascript">'
-//        , 'redirect();'
-//        , '</script>';   
-            }// end second if
-               
-     //      public function __construct($first, $last, $rle, $phne, $emal, $dep, $un = NULL, $pass = NULL, $id = NULL)    
+         
+        header("Location: /JGWentworth/View/User.php");
+ 
+    }// end first if
+    
+     if (isset($_POST['EditUser'])){
+       
+        $fName = $_POST['fName'];
+        $lName = $_POST['lName'];
+        $role = $_POST['Role'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $department = $_POST['department'];
+        $userName = $_POST['username'];
+        $password = $_POST['pass']; 
+        $userID = $_POST['editID'];
+        
+        $updateUser = new userClass($fName, $lName, $role, $phone,
+                 $email, $department, $userName, $password, $userID);      
+        $updateUser->updateUser();
+        
+         header("Location: /JGWentworth/View/User.php");
+    }// end second if
+     
+     if (isset($_GET['delete'])) {
+
+        $deleteID = urldecode(base64_decode($_GET['delete']));
+        userClass::deleteUser($deleteID);
+             
+        header("Location: /JGWentworth/View/User.php");
+    }

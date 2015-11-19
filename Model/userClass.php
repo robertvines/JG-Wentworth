@@ -93,7 +93,61 @@ class userClass {
                 } catch (Exception $ex) {
                    echo $ex->getMessage();
                 }//end try catch
-        
     }// end function createUser()
+    
+    function updateUser()
+    {        
+     try{ 
+         $user = 'sql591897';
+         $password = 'hA5!kQ4%';  
+         $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+         $pdo = new PDO($conn, $user, $password);
+         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         
+         $sqlGetUser = "SELECT LoginID FROM USER WHERE UserID=".$this->getUserID().";";
+         $result1 = $pdo->query($sqlGetUser);
+         $val1=$result1->fetch();
+         $logID = $val1['LoginID'];
+         
+         $sqlLog = "UPDATE sql591897.LOGIN SET UserName='".$this->getUserName()."', Password='".$this->getPassword()."'"
+                 . " WHERE LoginID=".$logID.";";
+         $pdo->exec($sqlLog);
+         
+         $sql = "UPDATE sql591897.USER SET FirstName='".$this->getFName()."', LastName='".$this->getLName()."', Role='".$this->getRole()."', Phone='".$this->getPhone()."',"
+                 . " Email='".$this->getEmail()."', Department='".$this->getDepartment()."' WHERE UserID=".$this->getUserID().";";        
+         
+            if ($pdo->query($sql) == TRUE) {
+                
+            } else {
+              //  echo "An error occurred while updating the record: " . $pdo->error;
+            }
+                                     
+        } catch (Exception $ex) {
+          // echo $ex->getMessage();
+     }//end try catch
+    }// end function updateUser()
+    
+     static function deleteUser($id){
+     // try{  
+        $user = 'sql591897';
+        $password = 'hA5!kQ4%';  
+        $conn ="mysql:host=sql5.freemysqlhosting.net;dbname=sql591897";
+         
+        $pdo = new PDO($conn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+         
+        $sqldelete = "DELETE LOGIN, USER FROM LOGIN INNER JOIN USER "
+                . "ON USER.LoginID = LOGIN.LoginID WHERE UserID = ".$id.";";
+        $pdo->exec($sqldelete); 
+//        if ($pdo->query($sql) == TRUE) {
+//                        
+//                    } else {
+//                      //  echo "An error occurred while deleting the record : " . $pdo->error;
+//                    }
+//                } catch (Exception $ex) {
+//                    echo $ex->getMessage();
+//                }//end try catch
+        
+    }// end function deleteUser()
       
 }
