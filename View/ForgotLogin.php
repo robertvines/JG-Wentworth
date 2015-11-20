@@ -1,9 +1,7 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * use javascript and php to populate username from email, then update statement for password.
  */
     
     include('PlainHeader.php');

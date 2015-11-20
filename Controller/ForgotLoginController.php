@@ -7,38 +7,25 @@
  */
 include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php');
 
+if(isset($_POST['forgot']))
+{
 $Email = $_POST['Email'];
 
-$sql = "SELECT Email FROM USER";
-//while($val=$result->fetch()):
-//        {
-        $email = $val['Email'];
-//        }endwhile;
-
-if ($Email == $email)
+if(!empty($Email))
 {
-    $sql = "SELECT Username, Password FROM User WHERE Email ='".$Email."'; ";
-    $result = $pdo->query($sql);
-
-        while($val=$result->fetch()):
-        {
-            $username = $val['Username'];
-            $password = $val['Password'];
-    
-    // the message
-    $msg = "UserName: '".$username."' \nPassword: ".$password;
-
-    // send email
-    mail($email,"Login Information",$msg);
-        }endwhile;
-        
-    header("Location: /JGWentworth/View/Login.php");
+   
+    echo "<script>
+        alert('Password Reset.');
+        window.location.href='/JGWentworth/View/Login.php';
+        </script>";
 }
-if ($Email != $email)
+    
+if (empty($Email))
 {
     echo "<script>
-        alert('Enter a correct email address.');
+        alert('Enter a correct email.');
         window.location.href='/JGWentworth/View/ForgotLogin.php';
         </script>";
+}
 }
 ?>
