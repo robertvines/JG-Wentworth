@@ -38,7 +38,7 @@
         $loginID = $val['LoginID'];
         }
        
-        $sql2="SELECT UserID, FirstName, LastName, Role FROM USER WHERE LoginID =".$loginID.";";
+        $sql2="SELECT UserID, FirstName, LastName, Role, Department FROM USER WHERE LoginID =".$loginID.";";
                             
         $row=$pdo->query($sql2);
 

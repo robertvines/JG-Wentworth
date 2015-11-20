@@ -7,7 +7,7 @@
  */
 
 session_start();
-    $session = $_SESSION[role];
+$session = $_SESSION[role];
     
     switch($session)
     {
