@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 if(isset($_POST['compReport']))
  {
      $val = $_POST['comp'];
