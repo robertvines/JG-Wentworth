@@ -25,7 +25,7 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                         <tr><td>User Name</td> <td><select id="filter" name="UserName"> 
                  
                        <?php 
-                      $sql3 = "SELECT UserID,FirstName,LastName FROM USER ORDER BY LastName, FirstName;";
+                      $sql3 = "SELECT UserID,FirstName,LastName FROM USER WHERE Role='Employee' ORDER BY LastName, FirstName;";
                       $result3 = $pdo->query($sql3); 
                 
                       while($val=$result3->fetch()):
