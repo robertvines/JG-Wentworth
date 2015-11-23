@@ -227,12 +227,12 @@ if(isset($_POST['compReport']))
                 <tr>
                     <td></td>
                     <td></td>
-                    <td id="compID<?php echo ''; ?>"><?php echo $empName; ?></td>
-                    <td id="name<?php echo ''; ?>"><?php echo $memberName; ?></td> 
-                    <td id="dateBus<?php echo ''; ?>"><?php echo $subject; ?></td>
-                    <td id="dateBus<?php echo ''; ?>"><?php echo $duration; ?> minutes</td>
-                    <td id="type<?php echo ''; ?>"><?php echo $datetime; ?></td> 
-                    <td id="address<?php echo ''; ?>"><?php echo $res; ?></td>
+                    <td><?php echo $empName; ?></td>
+                    <td><?php echo $memberName; ?></td> 
+                    <td><?php echo $subject; ?></td>
+                    <td><?php echo $duration; ?> minutes</td>
+                    <td><?php echo $datetime; ?></td> 
+                    <td><?php echo $res; ?></td>
                 </tr>
                 <?php
                    endwhile;//end inner2 while
