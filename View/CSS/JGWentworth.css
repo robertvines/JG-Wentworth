@@ -62,7 +62,7 @@ hr {
     float: left;
     height: 38px;
     line-height: 13px;
-    padding: 0 14px;
+    padding: 0 13px;
     text-decoration: none;
     color: #0F6746;
     }
@@ -84,7 +84,7 @@ a:visited {
 
 /* Position navigation bar link */
 #user {
-    text-indent: 234px;
+    text-indent: 235px;
     }
 
 /* Every page, grey */
