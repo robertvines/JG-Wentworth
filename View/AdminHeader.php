@@ -34,8 +34,8 @@
                 <li><a href="/JGWentworth/View/Client.php">Client</a></li>
                 <li><a href="/JGWentworth/View/User.php">User</a></li>
                 <li><a href="/JGWentworth/View/contact.php">Contact</a></li>
-                <li><a href="/JGWentworth/View/companyReport.php">Company Reports</a></li>
-                <li><a href="/JGWentworth/View/employeeReport.php">Employee Reports</a></li>
+                <li><a href="/JGWentworth/View/report.php">Reports</a></li>
+                
                 
                 <li><a id="user" href="/JGWentworth/View/Logout.php">Log out</a></li>
             </ul>    
