@@ -24,7 +24,9 @@
                     </table>
                     <p id="loginText"><input type="submit" value="Sign In"></p>    
                 </form>
-                <a href="ForgotLogin.php"><button style="float:right;" >Forgot Login?</button></a>
+                <div style="padding-right: 30px;">
+                    <a href="ForgotLogin.php"><button style="float:right;" >Forgot Login?</button></a>
+                </div>
             </div>
         </div>
     </body>

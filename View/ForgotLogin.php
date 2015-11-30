@@ -5,11 +5,12 @@
  */
     
     include('PlainHeader.php');
+    include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
 ?>
 
 <div id="page">
             <div id="loginBox">
-                <form method="post" action="/JGWentworth/Controller/ForgotLoginController.php">
+                <form method="post" action="/JGWentworth/View/UserInfo.php">
                     <p id='loginHeader'>Forgot Username or Password?</p>
                     <table id="tablebody" align ='center'>
                         <tr>
