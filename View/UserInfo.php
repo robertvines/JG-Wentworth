@@ -19,23 +19,24 @@
                             {
                                 $email = $_POST['Email'];
 
-                                    $sql1 = "SELECT LOGIN.UserName, LOGIN.Password, USER.Email FROM LOGIN "
+                                    $sql1 = "SELECT LOGIN.UserName, LOGIN.Password FROM LOGIN "
                                             . "JOIN USER "
                                             . "ON LOGIN.LoginID = USER.LoginID "
-                                            . "WHERE Email = ".$email;
+                                            . "WHERE Email = '".$email."';";
                                     $result1 = $pdo->query($sql1); 
 
                                     while($val=$result1->fetch()):
 
                                     $username = $val['UserName'];
                                     $pass = $val['Password'];
-                                    endwhile;                            
+                                    endwhile;                
+                                    
                             ?>
                         <tr>
                             <td style="border-color:white"><p id="loginText">Username: </td>
                             <td style="border-color:white"><?php echo $username; ?></td>
                         </tr>
-                        <tr>
+                        <tr style="background: white">
                             <td style="border-color:white"><p id="loginText">Password: </td>
                             <td style="border-color:white"><?php echo $pass; ?></td>
                         </tr>
