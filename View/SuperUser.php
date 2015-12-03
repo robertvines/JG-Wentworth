@@ -40,7 +40,7 @@
                         
                     ?>
                 <tr>
-                    <td><button>Employee Action</button>
+                    <td><button>Activity</button>
                     <td><?php echo $fName; ?></td>
                     <td><?php echo $lName; ?></td>
                     <td><?php echo $phone; ?></td>
