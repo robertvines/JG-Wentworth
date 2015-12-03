@@ -8,6 +8,18 @@
 
 ?>
 
+<style>
+hr {
+    height: 11px;
+    background-color: #0F6746;
+    border: none;
+    position: relative;
+    top: 58px;
+    margin-left: -8;
+    margin-right: -8;
+   }
+</style>
+
 <html>
     <head>
         <link rel="stylesheet" href="/JGWentworth/View/CSS/JGWentworth.css" type="text/css"/>
