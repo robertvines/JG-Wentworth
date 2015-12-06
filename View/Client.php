@@ -284,7 +284,7 @@
                             <tr>
                                 <td>Company:</td>
                                 <td>
-                                    <select name='company' id="editCompCompany" name="editCompCompany">
+                                    <select id="editCompCompany" name="editCompCompany">
                                         <?php
                                             $sql = "SELECT Name FROM COMPANY ORDER BY Name";
                                             $result = $pdo->query($sql);
@@ -471,8 +471,7 @@
                             <td id="showCompFName<?php echo $memberId; ?>"><?php echo $fName; ?></td>
                             <td id="showCompLName<?php echo $memberId; ?>"><?php echo $lName; ?></td>
                             <td id="showCompTitle<?php echo $memberId; ?>"><?php echo $title; ?></td>
-                            <td id="showCompCompany<?php echo $memberId; ?>">
-                                <?php echo $compName; ?></td>
+                            <td id="showCompCompany<?php echo $memberId; ?>"><?php echo $compName; ?></td>
                             <td id="showCompPhone<?php echo $memberId; ?>"><?php echo $phone; ?></td>
                             <td id="showCompEmail<?php echo $memberId; ?>"><?php echo $email; ?></td>
                             <td id="showCompFContact<?php echo $memberId; ?>"><?php echo $fContacted; ?></td>

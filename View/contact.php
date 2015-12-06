@@ -19,10 +19,13 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
      </script>
         <div id="page">
             <div id="body">
-              <form id="createForm" method="post" action="/JGWentworth/Controller/ContactController.php">
+                <label class="title">CONTACT</label>
+                <fieldset>
+                 <legend>Log Contact</legend>
+                 <form id="createForm" method="post" action="/JGWentworth/Controller/ContactController.php">
 
                     <table style="">
-                        <tr><td>User Name</td> <td><select id="filter" name="UserName"> 
+                        <tr><td>Employee Name</td> <td><select id="filter" name="UserID"> 
                  
                        <?php 
                       $sql3 = "SELECT UserID,FirstName,LastName FROM USER WHERE Role='Employee' ORDER BY LastName, FirstName;";
@@ -33,7 +36,6 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                       $FirstName = $val['FirstName']; 
                       $LastName = $val['LastName'];
                       
-
                       ?> 
                       <option id="<?php echo $UserID ?>" value="<?php echo $UserID?>"><?php echo $FirstName." ".$LastName ?></option>
                       <?php endwhile;
@@ -41,7 +43,7 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                       ?>
                       
                     </select></td></tr>
-                        <tr><td>Member Name</td> <td><select id="filter" name="MemberName"> 
+                        <tr><td>Member Name</td> <td><select id="filter" name="MemberID"> 
                  
                        <?php 
                       $sql1 = "SELECT MemberID,FirstName,LastName FROM COMPANY_MEMBER ORDER BY LastName, FirstName;";
@@ -51,9 +53,7 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                       $memID = $val['MemberID'];
                       $FirstName = $val['FirstName']; 
                       $LastName = $val['LastName'];
-                      
-                      
-                      
+
                       ?> 
                       <option id="<?php echo $memID ?>" value="<?php echo $memID ?>"><?php echo $FirstName." ".$LastName ?></option>
                       <?php endwhile;
@@ -73,7 +73,7 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                     </select>
                                 </td></tr>
                             <tr><td>Subject</td> <td><input type="text" id="SubjectID" name="Subject"></td></tr>
-                            <tr><td>Duration</td> <td><input type="text" id="Duration" name="Duration"></td></tr>
+                            <tr><td>Duration (min)</td> <td><input type="text" id="Duration" name="Duration"></td></tr>
                             <tr><td>DateTime</td> <td><input type="text" id="DateTime" name="DateTime"></td></tr>
                             <tr><td>Result</td> <td><input type="text" id="Result" name="Result"></td></tr>
                             </table>
@@ -81,6 +81,7 @@ include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
                   <input type="submit" class="btnsmall" name="createContact" value="Create">
                     
                 </form>
+                </fieldset>
             </div>
         </div>
     </body>

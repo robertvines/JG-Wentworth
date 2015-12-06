@@ -5,7 +5,12 @@
     session_start();
     $session = $_SESSION[dept];
 ?>
-
+<script>
+    $(document).ready(function() {     
+         $('.hiddenClass').hide();
+       
+    });// end document.ready function   
+</script>
 <body>
     <div id="page">
         <div id="body">
@@ -40,7 +45,13 @@
                         
                     ?>
                 <tr>
-                    <td><button>Activity</button>
+                    <td>
+                        <form action="/JGWentworth/View/employeeReport.php" method="post">
+                            <input  class="hiddenClass" type="text" name="emp" value="<?php echo $userID ?>">
+                            <input onclick="return confirm('Are you sure you want to leave this page?');"
+                                   type="submit" name="empReport" value="Activity">
+                        </form>
+                    </td>   
                     <td><?php echo $fName; ?></td>
                     <td><?php echo $lName; ?></td>
                     <td><?php echo $phone; ?></td>

@@ -141,7 +141,14 @@ th, td {
                                 </tr>
                                 <tr>
                                     <td>Department:</td>
-                                    <td><input type="text" name="department" /></td>
+                                    <td><select name="department">
+                                        <option value="Sales">Sales</option>
+                                        <option value="Accounting">Accounting</option>
+                                        <option value="IT">IT</option>
+                                        <option value="Human Resources">Human Resources</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Management">Management</option>
+                                        </select></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -197,7 +204,14 @@ th, td {
                             </tr>
                             <tr>
                                 <td>Department:</td>
-                                <td><input type="text" id='editDep' name="department" /></td>
+                                <td><select name="department" id="editDep">
+                                        <option value="Sales">Sales</option>
+                                        <option value="Accounting">Accounting</option>
+                                        <option value="IT">IT</option>
+                                        <option value="Human Resources">Human Resources</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Management">Management</option>
+                                        </select></td>
                             </tr>
                             <tr>
                                 <td>Phone:</td>

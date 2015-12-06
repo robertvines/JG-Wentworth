@@ -6,18 +6,19 @@
  * and open the template in the editor.
  */
 require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/userClass.php');
+include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/validate.php';
 
     if (isset($_POST['CreateUser'])) {
    
-        $newfName = $_POST['fName'];
-        $newlName = $_POST['lName'];
-        $newRole = $_POST['Role'];
-        $newPhone = $_POST['phone'];
-        $newEmail = $_POST['email'];
-        $newDepartment = $_POST['department'];
-        $newUserName = $_POST['username'];
-        $newPassword = $_POST['pass'];
-        
+        $newfName = valString($_POST['fName'], true);
+        $newlName = valString($_POST['lName'], true);
+        $newRole = valString($_POST['Role'], true);
+        $newPhone = valPhone($_POST['phone'], true);
+        $newEmail = valEmail($_POST['email'], true);
+        $newDepartment = valString($_POST['department'], true);
+        $newUserName = valString($_POST['username'], true);
+        $newPassword = valString($_POST['pass'], true);
+       
         $newUser = new userClass($newfName, $newlName, $newRole, $newPhone,
                  $newEmail, $newDepartment, $newUserName, $newPassword);                        
         $newUser->createUser();
@@ -28,14 +29,14 @@ require_once ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/userClass.php');
     
      if (isset($_POST['EditUser'])){
        
-        $fName = $_POST['fName'];
-        $lName = $_POST['lName'];
-        $role = $_POST['Role'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $department = $_POST['department'];
-        $userName = $_POST['username'];
-        $password = $_POST['pass']; 
+        $fName = valString($_POST['fName'], true);
+        $lName = valString($_POST['lName'], true);
+        $role = valString($_POST['Role'], true);
+        $phone = valPhone($_POST['phone'], true);
+        $email = valEmail($_POST['email'], true);
+        $department = valString($_POST['department'], true);
+        $userName = valString($_POST['username'], true);
+        $password = valString($_POST['pass'], true); 
         $userID = $_POST['editID'];
         
         $updateUser = new userClass($fName, $lName, $role, $phone,
