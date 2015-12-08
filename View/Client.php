@@ -8,7 +8,7 @@
      showPage('all');
  }
 /* 
- * To create, edit, and delete companie employees and non-employees
+ * 
  */
  function showPage($val) {
      $compVal = $val;
