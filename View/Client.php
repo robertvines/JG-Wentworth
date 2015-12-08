@@ -8,7 +8,7 @@
      showPage('all');
  }
 /* 
- * To create, edit, and delete companie employees and non-employees
+ * 
  */
  function showPage($val) {
      $compVal = $val;
@@ -358,6 +358,7 @@
                 </div>
 
                 <?php
+                /*Determines what is shown on the page*/
                         switch($compVal){
                             case 'all':
                                 $sql = "SELECT COMPANY_MEMBER.*, COMPANY.Name FROM COMPANY_MEMBER "
