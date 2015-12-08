@@ -6,6 +6,9 @@ Initial page to view companies
 <?php 
     include ($_SERVER["DOCUMENT_ROOT"].'/JGWentworth/View/Header.php');
     include $_SERVER["DOCUMENT_ROOT"].'/JGWentworth/Model/database.php';
+    
+    session_start();
+    $role = $_SESSION[role];
 ?>
 <script>
 /* *************************************************************************
@@ -156,11 +159,11 @@ legend {
                 </form>
             </div>
           </div>    
-                
+         <?php if($role != "Employee"){ ?>       
           <div>
              <button id="createCom" class="btn">Create New Company</button>
           </div>      
-                
+         <?php } ?>
             <div class="table-wrapper">
             <table>
                     <th>Action</th><th>ID</th><th>Name</th><th>Date of First Business</th><th>Business Type</th><th>Address</th>
@@ -179,9 +182,9 @@ legend {
                     $url = $comID;
                     ?>
                 <tr>
-                    <td><button class="editCom" id=<?php echo $comID; ?> >Edit</button>
+                    <td> <?php if($role != "Employee"){ ?> <button class="editCom" id=<?php echo $comID; ?> >Edit</button>
                         <a href="/JGWentworth/Controller/companyController.php?delete=<?php echo urlencode(base64_encode($url));?>" 
-                        onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>
+                        onclick="return confirm('Are you sure you want to delete this company?');"><input type="submit" value="Delete"></a>  <?php } ?>
                         
                         <form action="/JGWentworth/View/Client.php" method="post" class="clientForm">
                             <input class="hideInput" type="text" name="selector" value="<?php echo $comID;?>">

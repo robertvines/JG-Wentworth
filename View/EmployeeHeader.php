@@ -36,8 +36,7 @@
                 <li><a href="/JGWentworth/View/Company.php">Company</a></li>
                 <li><a href="/JGWentworth/View/Client.php">Client</a></li>
                 <li><a href="/JGWentworth/View/contact.php">Contact</a></li>
-                <li><a href="/JGWentworth/View/report.php">Reports</a></li>
-                
+
                 <li><a id="user" href="/JGWentworth/View/Logout.php">Log out</a></li>
             </ul>    
         </div>
